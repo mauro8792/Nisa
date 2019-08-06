@@ -7,4 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class Payment extends Model
 {
     protected $filliable = ['description', 'payment','date'];
+
+    public function client()
+    {
+        return $this->belongsTo('App\Client');
+    }
 }

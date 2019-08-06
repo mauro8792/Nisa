@@ -44,11 +44,10 @@ class ClientController extends Controller
         $client->email = $request->input('email');
         $client->slug = $request->input('name');
         $client->save();
-
-        //$cliente = Client::all();
-        
+        //Creamos la cuenta y se la asignamos al cliente
         $account = new Account();
         $account->client_id= $client->id;
+        $account->client()->associate($client->id);
         $account->save();
         return redirect()->route('clients.index');
     }

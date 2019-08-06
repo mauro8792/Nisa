@@ -39,11 +39,11 @@ class SaleController extends Controller
     public function store(Request $request)
     {
         $sale = new Sale();
-        $sale->client_id = $request->input('client');
+        //$sale->client_id = $request->input('client');
+        $sale->client()->associate($request->input('client'));
         $sale->description =$request->input('description');
         $sale->senia = $request->input('senia');
         $sale->total= $request->input('total');
-        $sale->date = $request->input('date');
         $sale->save();
 
         $account = new Account();
@@ -58,7 +58,7 @@ class SaleController extends Controller
             $cuentaCorriente->assets=$sale->senia;
         }
         $cuentaCorriente->debit= $sale->total;
-        $cuentaCorriente->date = $sale->date;
+        $cuentaCorriente->date =$request->input('date');
         $cuentaCorriente->save();
     }
 

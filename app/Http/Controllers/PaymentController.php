@@ -41,9 +41,9 @@ class PaymentController extends Controller
     {
         $pago = new Payment();
         $pago->description =$request->input('description'); 
-        $pago->client_id =$request->input('client');
+        //$pago->client_id =$request->input('client');
+        $pago->client()->associate($request->input('client'));
         $pago->payment = $request->input('payment');  
-        $pago->date= $request->input('date');
         $pago->save();
 
         $account = new Account();
@@ -55,7 +55,7 @@ class PaymentController extends Controller
         $cuentaCorriente->client_id = $pago->client_id;
         $cuentaCorriente->account_id = $account->id;
         $cuentaCorriente->assets= $pago->payment;
-        $cuentaCorriente->date = $pago->date;
+        $cuentaCorriente->date = $request->input('date');
         $cuentaCorriente->save();
 
     }
