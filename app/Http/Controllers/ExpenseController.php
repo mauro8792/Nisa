@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Account;
-use App\Clients;
-use App\CurrentAccount;
+
 use Illuminate\Http\Request;
 
-class CurrentAccountController extends Controller
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -45,20 +43,9 @@ class CurrentAccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(CurrentAccount $currentaccount)
+    public function show($id)
     {
-        dd($currentaccount->id);
-        $account = new Account();
-        $account = Account::where('client_id', $currentaccount->client_id);
-        //dd($currentaccount);
-        //dd($account);
-        $cuentaCorriente = CurrentAccount::where('account_id', $currentaccount->account_id)->get();
-        //dd($cuentaCorriente);
-        //var_dump($request->id);
-        //dd($account);
-        return view('currentaccounts.show',  compact('cuentaCorriente','account'));
-
-        
+        //
     }
 
     /**

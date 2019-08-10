@@ -58,8 +58,10 @@ class SaleController extends Controller
             $cuentaCorriente->assets=$sale->senia;
         }
         $cuentaCorriente->debit= $sale->total;
+        $cuentaCorriente->total= $account->accountTotal;
         $cuentaCorriente->date =$request->input('date');
         $cuentaCorriente->save();
+        return redirect()->route('clients.index');
     }
 
     /**

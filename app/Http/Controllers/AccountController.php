@@ -1,7 +1,9 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Account;
+use App\Clients;
+use App\CurrentAccount;
 use Illuminate\Http\Request;
 
 class AccountController extends Controller
@@ -13,7 +15,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
+           // return view('accounts.show');
     }
 
     /**
@@ -23,7 +25,7 @@ class AccountController extends Controller
      */
     public function create()
     {
-        //
+        //return view('accounts.show');
     }
 
     /**
@@ -43,9 +45,11 @@ class AccountController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Account $account)
     {
-        //
+        $cuentaCorriente = CurrentAccount::where('account_id', $account->id)->get();
+        return view('currentaccounts.show',  compact('cuentaCorriente','account'));
+        
     }
 
     /**
@@ -56,7 +60,7 @@ class AccountController extends Controller
      */
     public function edit($id)
     {
-        //
+        //return view('accounts.show');
     }
 
     /**

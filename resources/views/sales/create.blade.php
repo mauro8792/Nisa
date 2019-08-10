@@ -12,7 +12,7 @@
         </div>
         <div class="form-group">
             <label for="">date</label>
-            <input type="date" name="date" class="form-control">
+            <input type="date" name="date" class="form-control" value="<?php echo date("Y-m-d");?>">
         </div>
         <div class="form-group">
             <label for="">senia</label>

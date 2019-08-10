@@ -17,7 +17,9 @@ class PaymentController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        //return "hola wacho";
+        return view ('payments.index', compact('clients'));
     }
 
     /**
@@ -25,8 +27,9 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Payment $client)
     {
+        //dd($client->id);
         $clients = Client::all();
         return view ('payments.create', compact('clients'));
     }
@@ -37,12 +40,20 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    /*
+
+        CREO QUE DEBERIAMOS INCLUIR EN LA TABLA DE CUENTAS CORRIENTES 
+        EL SALE_ID Y PAYMENT_ID, PARA PODER PONER EN LA VISTA 
+        EL NOMBRE DEL PRODUCTO QUE COMPRO Y EN EL PAGO, SI FUE CON EFECTIVO 
+        Ó CON CHEQUE.
+
+    */
     public function store(Request $request)
     {
         $pago = new Payment();
         $pago->description =$request->input('description'); 
-        //$pago->client_id =$request->input('client');
-        $pago->client()->associate($request->input('client'));
+        $pago->client()->associate($request->input('client_id'));
+        $pago->paymentForm = $request->input('paymentForm');
         $pago->payment = $request->input('payment');  
         $pago->save();
 
@@ -55,8 +66,10 @@ class PaymentController extends Controller
         $cuentaCorriente->client_id = $pago->client_id;
         $cuentaCorriente->account_id = $account->id;
         $cuentaCorriente->assets= $pago->payment;
+        $cuentaCorriente->total= $account->accountTotal;
         $cuentaCorriente->date = $request->input('date');
         $cuentaCorriente->save();
+        return redirect()->route('clients.index');
 
     }
 
@@ -68,7 +81,8 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
+         return view ('payments.show');
     }
 
     /**
@@ -103,5 +117,12 @@ class PaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function newPayment($id){
+         
+        $cliente = Client::where('id', $id)->first();
+        $account = Account::where('client_id', $cliente->id)->first();
+        
+        return view('payments.createPayment', compact('cliente','account'));
     }
 }

@@ -19,6 +19,7 @@ class CreateCurrentAccountsTable extends Migration
             $table->integer('account_id')->unsigned();
             $table->float('debit', 8, 2)->nullable();
             $table->float('assets', 8, 2)->nullable();
+            $table->float('total',8,2)->nullable();
             $table->date('date');
             $table->timestamps();
 
