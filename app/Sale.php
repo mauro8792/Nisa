@@ -12,4 +12,8 @@ class Sale extends Model
     {
         return $this->belongsTo('App\Client');
     }
+    public function currents()
+    {
+        return $this->hasMany('App\CurrentAccount');
+    }
 }

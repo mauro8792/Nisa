@@ -54,6 +54,7 @@ class SaleController extends Controller
         $cuentaCorriente = new CurrentAccount();
         $cuentaCorriente->client_id = $sale->client_id;
         $cuentaCorriente->account_id = $account->id;
+        $cuentaCorriente->sale()->associate($sale->id);
         if($sale->senia != 0){
             $cuentaCorriente->assets=$sale->senia;
         }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Account;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
@@ -14,9 +15,21 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        $clients = Client::all();
-        
+        //$clients = Client::all();
+         /* $clients = Client::with(['account'=>function($query){
+            $query->select('id', 'accountTotal')
+        ->where('id','=',$clients->id);
+        }])->get();
+        dd($clients);
+*/
+        $clients = DB::table('clients')
+            ->join('accounts', 'clients.id', '=', 'accounts.client_id')
+            //->select('users.id', 'contacts.phone', 'orders.price')
+            ->get();
+            //dd($clients);
         return view('clients.index', compact('clients'));
+
+        
     }
 
     /**
@@ -59,8 +72,8 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        return view('accounts.show');
+    {   
+        return view('clients.show');
     }
 
     /**

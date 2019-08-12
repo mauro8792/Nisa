@@ -40,14 +40,7 @@ class PaymentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    /*
-
-        CREO QUE DEBERIAMOS INCLUIR EN LA TABLA DE CUENTAS CORRIENTES 
-        EL SALE_ID Y PAYMENT_ID, PARA PODER PONER EN LA VISTA 
-        EL NOMBRE DEL PRODUCTO QUE COMPRO Y EN EL PAGO, SI FUE CON EFECTIVO 
-        Ó CON CHEQUE.
-
-    */
+   
     public function store(Request $request)
     {
         $pago = new Payment();
@@ -65,6 +58,7 @@ class PaymentController extends Controller
         $cuentaCorriente = new CurrentAccount();
         $cuentaCorriente->client_id = $pago->client_id;
         $cuentaCorriente->account_id = $account->id;
+        $cuentaCorriente->payment()->associate($pago->id);
         $cuentaCorriente->assets= $pago->payment;
         $cuentaCorriente->total= $account->accountTotal;
         $cuentaCorriente->date = $request->input('date');
@@ -81,8 +75,8 @@ class PaymentController extends Controller
      */
     public function show($id)
     {
-        dd($id);
-         return view ('payments.show');
+        $pago= Payment::where('id', $id)->first();
+         return view ('payments.show', compact('pago'));
     }
 
     /**

@@ -5,13 +5,12 @@
 @section('content')
     <p>List of Clients</p>
 
-    <table class="table">
+    <table class="table table-hover">
         <thead>
            
             <th scope="row">Fecha</th>
-            <th scope="col">id  </th>
-            <th scope="col">id cliente</th>
-            <th scope="col">id cuenta corriente</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Forma de Pago</th>
             <th scope="col">Debe</th>
             <th scope="col">Haber</th>
             <th scope="col">Total</th>
@@ -21,18 +20,34 @@
                 
                 <tr>
                    
-                    <td scope="row">{{$cuenta->date}}</td>
-                    <th scope="row">{{$cuenta->id}}</th>
-                    <td scope="row">{{$cuenta->client_id}}</td>
-                    <td scope="row">{{$cuenta->account_id}}</td>
-                    <td scope="row">{{$cuenta->debit}}</td>
-                    <td scope="row">{{$cuenta->assets}}</td>
-                    <td scope="row">{{$cuenta->total}}</td>
+                    <td scope="row">{{date('d-m-Y',strtotime($cuenta->date))}}</td>                    
+                    <td scope="row">{{$cuenta->sale['description']}}</td>
+                    
+                <td scope="row"><a href="/payments/{{$cuenta->payment_id}}" > {{$cuenta->payment['paymentForm']}} </a></td>
+                    
+                        
+                    
+                    <td scope="row">
+                        @if ($cuenta->debit!=0)
+                            ${{$cuenta->debit}}
+                        @endif
+                        
+                    </td>
+                    <td scope="row">
+                         @if ($cuenta->assets!=0)
+                            ${{$cuenta->assets}}
+                        @endif
+                        
+                    </td>
+                    <td scope="row">${{$cuenta->total}}</td>
 
                 </tr>
             @endforeach
         </tbody>
     </table>
+    <a href="/clients">
+            <input type="button" value="Volver" class="btn btn-danger btn-block" style="color: white" name="Volver">
+    </a>
    
 
 @endsection

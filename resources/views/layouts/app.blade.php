@@ -5,11 +5,13 @@
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        
+        <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
+        <link rel=”stylesheet” href=”tucarpeta/css/font-awesome.min.css“>
+    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     </head>
-    <body>
+    <body  > 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <a class="navbar-brand" href="#">Navbar</a>
+            <a class="navbar-brand" href="http://localhost:8000/">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -22,8 +24,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownClientes">
                             <a class="dropdown-item" href="{{route('clients.index')}}">Ver todos..</a>
-                            <a class="dropdown-item" href="{{route('clients.create')}}">Nuevo Cliente</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('clients.create')}}">Nuevo Cliente</a>                            
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>
@@ -33,8 +35,8 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownEmployee">
                             <a class="dropdown-item" href="{{route('employees.index')}}">Ver todos..</a>
-                            <a class="dropdown-item" href="{{route('employees.create')}}">Nuevo Empleado</a>
                             <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('employees.create')}}">Nuevo Empleado</a>                            
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
                     </li>

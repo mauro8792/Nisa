@@ -17,8 +17,8 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('description');
             $table->integer('category_id')->unsigned();
-            $table->float('totalAmount', 8, 2);
-            $table->float('totalPayment', 8, 2);
+            $table->float('totalAmount', 8, 2)->unsigned()->nullable();
+            $table->float('totalPayment', 8, 2)->unsigned();
             $table->timestamps();
 
             $table->foreign('category_id')->references('id')->on('categories');

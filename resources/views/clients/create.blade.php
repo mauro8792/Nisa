@@ -3,30 +3,33 @@
 @section('title', 'Create client')
 
 @section('content')
-    <p>Client: </p>
-    <form class="form-group" method="POST" action="/clients">
+    <p><h1 class="text-center my-3">Nuevo Cliente:</h1> </p>
+    
+    <form class="form-group mt-5"  method="POST" action="/clients">
         @csrf
-        <div class="form-group">
-            <label for="">Name</label>
-            <input type="text" name="name" class="form-control">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Nombre</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required>
+                
+            </div>
+            <div class="form-group col-md-6">
+                <label for="lastname">Apellido</label>
+                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Apellido" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="">Last Name</label>
-            <input type="text" name="lastname" class="form-control">
+        <div class="form row">
+            <div class="form-group col-md-6">
+                <label for="email">Email</label>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="telephone">Telefono </label>
+                <input type="text" class="form-control" name="telephone" id="telephone" placeholder="Teléfono" required>
+            </div>
         </div>
-        <div class="form-group">
-            <label for="">email</label>
-            <input type="text" name="email" class="form-control">
-        </div>
-        
-        <div class="form-group">
-            <label for="">Telephone</label>
-            <input type="text" name="telephone" class="form-control">
-        </div>
-        
-
-        
-        <button type="submit" class="btn btn-primary">Guardar</button>
-    </form> 
-
+  <button type="submit" class="btn btn-primary">Guardar</button>
+  <a href="/clients" class="btn btn-danger">Volver</a>
+    </form>
+    
 @endsection

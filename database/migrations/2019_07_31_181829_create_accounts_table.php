@@ -16,7 +16,7 @@ class CreateAccountsTable extends Migration
         Schema::create('accounts', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('client_id')->unsigned();
-            $table->float('accountTotal', 8, 2)->nullable();            
+            $table->float('accountTotal', 8, 2)->nullable()->unsigned();            
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients');

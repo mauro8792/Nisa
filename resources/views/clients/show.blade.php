@@ -4,5 +4,5 @@
 
 @section('content')
    
-
+hola wacho
 @endsection

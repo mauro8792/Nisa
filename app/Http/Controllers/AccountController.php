@@ -47,7 +47,18 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        $cuentaCorriente = CurrentAccount::where('account_id', $account->id)->get();
+        //$cuentaCorriente = CurrentAccount::where('account_id', $account->id)->get();
+        //return view('currentaccounts.show',  compact('cuentaCorriente','account'));
+
+        $cuentaCorriente= CurrentAccount::where('account_id', $account->id)->with(['sale'=>function($query){
+            $query->select('id', 'description');
+        }])
+        ->with(['payment' => function($queryPayment){
+            $queryPayment->select('id','paymentForm');
+        }])->get();
+
+        //dd($cuentaCorriente);
+        
         return view('currentaccounts.show',  compact('cuentaCorriente','account'));
         
     }

@@ -27,15 +27,15 @@
         </div>
         <div class="form-group">
             <label for="">Descripcion</label>
-            <input type="text" name="description" class="form-control">
+            <input type="text" name="description" class="form-control" >
         </div>
         <div class="form-group">
             <label for="">date</label>
-            <input type="date" name="date" class="form-control" value="<?php echo date("Y-m-d");?>">
+            <input type="date" name="date" class="form-control" value="<?php echo date("Y-m-d");?>" required>
         </div>
         <div class="form-group">
             <label for="">payment</label>
-            <input type="text" name="payment" class="form-control">
+            <input type="text" name="payment" class="form-control" required>
         </div>
         
         
@@ -44,6 +44,8 @@
 
         
         <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="/clients" class="btn btn-danger">Volver</a>
+    
     </form> 
 
 @endsection
