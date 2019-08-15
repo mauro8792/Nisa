@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Expense extends Model
 {
-    protected $fillable =['description','totalAmount','totalPayment']   ;
+    protected $fillable =['description','totalAmount','totalPayment','category_id']   ;
 
-    public function categories()
+    public function category()
     {
         return $this->belongsTo('App\Category');
     }

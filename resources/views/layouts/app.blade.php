@@ -7,6 +7,7 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
         <link rel=”stylesheet” href=”tucarpeta/css/font-awesome.min.css“>
+        <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     </head>
     <body  > 

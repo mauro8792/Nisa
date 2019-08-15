@@ -21,7 +21,7 @@
                 
                 <tr>
                    
-                    <td scope="row">{{$cuenta->date}} <i class="fa fa-camera-retro fa-lg"></i> </td>
+                    <td scope="row">{{$cuenta->date}}  </td>
                     <th scope="row">{{$cuenta->id}}</th>
                     <td scope="row">{{$cuenta->client_id}}</td>
                     <td scope="row">{{$cuenta->account_id}}</td>

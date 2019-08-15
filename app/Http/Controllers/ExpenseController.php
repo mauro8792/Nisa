@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Category;
+use App\Expense;
 use Illuminate\Http\Request;
 
 class ExpenseController extends Controller
@@ -23,7 +24,8 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        //
+        $categories = Category::all();
+        return view('expenses.create', compact('categories'));
     }
 
     /**
@@ -34,7 +36,9 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //dd($request->all());
+        $expense=Expense::create($request->all());
+        return redirect()->route('expenses.index');
     }
 
     /**
