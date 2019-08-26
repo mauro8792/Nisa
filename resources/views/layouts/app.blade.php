@@ -62,7 +62,7 @@
                             <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pago</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('sales.create')}}">Nueva Venta</a>
-                            <a class="dropdown-item" href="{{route('sales.create')}}">Ver Pago</a>
+                            <a class="dropdown-item" href="{{route('sales.index')}}">Ver ventas</a>
                             
                         </div>
                     </li>

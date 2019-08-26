@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Category;
-use App\Expense;
+use App\Client;
+use App\Sale;
+use App\Account;
+use App\CurrentAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
-class ExpenseController extends Controller
+class SummaryController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,15 +17,13 @@ class ExpenseController extends Controller
      */
     public function index()
     {
+        $sales = DB::table('sales')
+            ->join('clients', 'sales.client_id','=','clients.id')
+            ->get();
         $expenses = DB::table('expenses')
             ->join('categories', 'expenses.category_id','=','categories.id')
             ->get();
-       // dd($expenses);
-        return view("expenses.index", compact('expenses'));
-
-
-
-       
+        return view("summaries.index", compact("sales","expenses"));
     }
 
     /**
@@ -33,8 +33,7 @@ class ExpenseController extends Controller
      */
     public function create()
     {
-        $categories = Category::all();
-        return view('expenses.create', compact('categories'));
+        //
     }
 
     /**
@@ -45,9 +44,7 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
-        $expense=Expense::create($request->all());
-        return redirect()->route('expenses.index');
+        //
     }
 
     /**

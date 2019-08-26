@@ -6,6 +6,7 @@ use App\Sale;
 use App\Account;
 use App\CurrentAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class SaleController extends Controller
 {
@@ -14,9 +15,36 @@ class SaleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        //$sales= Sale::all();
+        $sales = DB::table('sales')
+            ->join('clients', 'sales.client_id','=','clients.id')
+            ->get();
+        /*
+        $f1 = $f2 = date('Y-m-d');
+
+        if(!is_null($request->fechaInicial) && !empty($request->fechaInicial) && !is_null($request->fechaFinal) || !empty($request->fechaFinal)){
+            $f1 = $request->fechaInicial;
+            $f2 = $request->fechaFinal;
+        }
+        
+        $sales = DB::table('sales')
+            ->join('clients', 'sales.client_id','=','clients.id')
+            ->whereBetween('created_at', [$f1, $f2])
+            ->get();
+
+*/
+
+
+
+
+
+
+
+
+        //var_dump($sales);
+        return view ('sales.index', compact('sales'));
     }
 
     /**

@@ -12,13 +12,13 @@
             <th scope="col">Email</th>
             <th scope="col">Telephone</th>
             <th scope="col">Edit</th>
-            <th scope="col">Estado de cuenta <i class="fas fa-chart-line"></i></th>
+            <th scope="col">Estado de cuenta </th>
             <th scope="col">Realizar pago</th>
         </thead>
         <tbody>
             @foreach($clients as $client)
                 <tr>
-                    <th scope="row">{{$client->name}} <i class="fas fa-camera-retro fa-lg"></i></th>
+                    <th scope="row">{{$client->name}} </th>
                     <td scope="row">{{$client->lastname}}</td>
                     <td scope="row">{{$client->email}}</td>
                     <td scope="row">{{$client->telephone}}</td>
