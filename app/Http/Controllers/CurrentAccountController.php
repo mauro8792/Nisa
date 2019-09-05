@@ -47,7 +47,7 @@ class CurrentAccountController extends Controller
      */
     public function show(CurrentAccount $currentaccount)
     {
-        dd($currentaccount->id);
+        //dd($currentaccount->id);
         $account = new Account();
         $account = Account::where('client_id', $currentaccount->client_id);
         //dd($currentaccount);

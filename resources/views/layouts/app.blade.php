@@ -7,6 +7,8 @@
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
         <link rel=”stylesheet” href=”tucarpeta/css/font-awesome.min.css“>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
         <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
     <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
     </head>
@@ -54,11 +56,24 @@
                         </div>
                     </li>
                      <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownGastos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPagos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Pagos/Ventas
                         </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdownGastos">
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownPagos">
                             <a class="dropdown-item" href="{{route('payments.create')}}">Nuevo Pago</a>
+                            <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pago</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="{{route('sales.create')}}">Nueva Venta</a>
+                            <a class="dropdown-item" href="{{route('sales.index')}}">Ver ventas</a>
+                            
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownResumen" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Resumen
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownResumen">
+                            <a class="dropdown-item" href="{{route('summaries.index')}}">Resumen x mes</a>
                             <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pago</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('sales.create')}}">Nueva Venta</a>

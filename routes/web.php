@@ -17,8 +17,8 @@ Route::get('/', function () {
 
 
 Route::resource('clients', 'ClientController');
-Route::resource('sales', 'SaleController');
-Route::resource('summaries', 'SummaryController');
+
+
 
 Route::resource('employees', 'EmployeeController');
 Route::resource('expenses', 'ExpenseController');
@@ -33,4 +33,21 @@ Route::prefix('/pagos')->name('payments.')->group(function(){
     Route::delete('/delete/{id}','PaymentController@destroy')->name('destroy');
     Route::get('/newPayment/{id}','PaymentController@newPayment')->name('newPayment'); 
     Route::get('/employee','PaymentController@searchSale')->name('searchSale');      
+});
+
+Route::resource('sales', 'SaleController');
+
+Route::prefix('/ventas')->name('sales.')->group(function(){
+    Route::get('/', 'SaleController@index')->name('index');
+    Route::get('/nueva','SaleController@create')->name('create');
+    Route::get('/ventas/{id}/edit', 'SaleController@edit')->name('edit');
+    Route::delete('/detele/{id}','SaleController@destroy')->name('destroy');
+    Route::get('/forOrder/{numberOfOrden}','SaleController@forOrder')->name('forOrder');
+});
+
+Route::resource('summaries', 'SummaryController');
+Route::prefix('/resumen')->name('summary.')->group(function(){
+    Route::get('/','SummaryController@index')->name('index');
+    Route::post('/searchForDate', 'SummaryController@searchForDate')->name('searchForDate');
+    Route::post('/searchForMonth', 'SummaryController@searchForMonth')->name('searchForMonth');
 });

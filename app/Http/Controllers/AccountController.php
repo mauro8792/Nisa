@@ -51,7 +51,7 @@ class AccountController extends Controller
         //return view('currentaccounts.show',  compact('cuentaCorriente','account'));
 
         $cuentaCorriente= CurrentAccount::where('account_id', $account->id)->with(['sale'=>function($query){
-            $query->select('id', 'description');
+            $query->select('id', 'description','numberOfOrder');
         }])
         ->with(['payment' => function($queryPayment){
             $queryPayment->select('id','paymentForm');

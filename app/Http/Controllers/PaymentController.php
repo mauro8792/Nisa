@@ -48,6 +48,7 @@ class PaymentController extends Controller
         $pago->client()->associate($request->input('client_id'));
         $pago->paymentForm = $request->input('paymentForm');
         $pago->payment = $request->input('payment');  
+        $pago->date=$request->input('date');
         $pago->save();
 
         $account = new Account();

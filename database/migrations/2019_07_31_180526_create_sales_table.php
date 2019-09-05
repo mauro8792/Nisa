@@ -16,9 +16,13 @@ class CreateSalesTable extends Migration
         Schema::create('sales', function (Blueprint $table) {
             $table->increments('id');
             $table->string('description');
+            $table->string('shortDescription');
             $table->float('senia', 8, 2)->nullable()->unsigned();
             $table->float('total', 8, 2)->unsigned();
             $table->integer('client_id')->unsigned();
+            $table->date('date');
+            $table->integer('numberOfOrder');
+            $table->string('state');
             $table->timestamps();
 
             $table->foreign('client_id')->references('id')->on('clients');

@@ -30,7 +30,7 @@
             <input type="text" name="description" class="form-control" >
         </div>
         <div class="form-group">
-            <label for="">date</label>
+            <label for="">Fecha</label>
             <input type="date" name="date" class="form-control" value="<?php echo date("Y-m-d");?>" required>
         </div>
         <div class="form-group">

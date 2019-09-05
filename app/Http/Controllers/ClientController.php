@@ -27,7 +27,8 @@ class ClientController extends Controller
             //->select('users.id', 'contacts.phone', 'orders.price')
             ->get();
             //dd($clients);
-        return view('clients.index', compact('clients'));
+        return view('summaries.probando', compact('clients'));
+        //return view('clients.index', compact('clients'));
 
         
     }
@@ -56,6 +57,7 @@ class ClientController extends Controller
         $client->telephone =$request->input('telephone');
         $client->email = $request->input('email');
         $client->slug = $request->input('name');
+        $client->numberOfOrder=1;
         $client->save();
         //Creamos la cuenta y se la asignamos al cliente
         $account = new Account();

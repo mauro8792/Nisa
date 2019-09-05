@@ -10,7 +10,7 @@
             <th scope="col">Categoria </th>
             <th scope="col">descripcion</th>
             <th scope="col">Costo Total</th>
-            <th scope="col">Pago parcial</th>
+            
             <th scope="col">Fecha</th>
             
         </thead>
@@ -19,7 +19,6 @@
                 <tr>
                     <th scope="row">{{$expense->name}} </th>
                     <td scope="row">{{$expense->description}}</td>
-                    <td scope="row">{{$expense->totalAmount}}</td>
                     <td scope="row">{{$expense->totalPayment}}</td>
                     <td scope="row">{{$expense->created_at}}</td>
                     

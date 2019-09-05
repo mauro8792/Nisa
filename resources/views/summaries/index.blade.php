@@ -3,89 +3,96 @@
 @section('title', 'Resumen')
 
 @section('content')
-    <p><h1 class="text-center my-3">Resumen</h1> </p>
 
-    <table class="table">
-        <thead>
-            <th colspan="3" scope="col">Ventas</th>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Fecha</td>
-                <td>Cliente</td>
-                <td>Descripcion</td>
-                <td>Total</td>
-            </tr>
-            @php
-                 $total = 0;
-            @endphp
-            @foreach($sales as $sale)
-            <tr>
-                <td scope="row">{{date('d-m-Y',strtotime($sale->created_at))}}</td>
-                <th scope="row">{{$sale->name}} </th>
-                <td scope="row">{{$sale->description}}</td>
-                <td scope="row">{{$sale->total}}</td>   
-                @php
-                 $total = $total + $sale->total;
-                @endphp                 
-            </tr>
-            @endforeach
+<div class="container row">
+    <div class="text-left">
+        <form method="POST" action="/resumen/searchForDate" > 
+            @csrf
+            <div>
+                <label for="inicial">Desde</label>
+                <input type="date" name="init">
+                <label for="inicial">Hasta</label>
+                <input type="date" name="fin">
+                <button type="submit">Buscar</button>
+            </div>
             
+        </form>
+    </div>
+    
+    <div class="text-right"> 
+        <form method="POST" action="/resumen/searchForMonth" >
+            @csrf
+            <div>
+                <label for="inicial"> Buscar por mes</label>
+                <select name="month" id="month">
+                    <option value="1" class="form-control input-lg text-success">Enero</option>
+                    <option value="2" class="form-control input-lg text-success">Febrero</option>
+                    <option value="3" class="form-control input-lg text-success">Marzo</option>
+                    <option value="4" class="form-control input-lg text-success">Abril</option>
+                    <option value="5" class="form-control input-lg text-success">Mayo</option>
+                    <option value="6" class="form-control input-lg text-success">Junio</option>
+                    <option value="7" class="form-control input-lg text-success">Julio</option>
+                    <option value="8" class="form-control input-lg text-success">Agosto</option>
+                    <option value="9" class="form-control input-lg text-success">Septiembre</option>
+                    <option value="10" class="form-control input-lg text-success">Octubre</option>
+                    <option value="11" class="form-control input-lg text-success">Noviembre</option>
+                    <option value="12" class="form-control input-lg text-success">Diciembre</option>
+
+                </select>
+                <label for="inicial">Año</label>
+                <select name="age" id="age">
+                    <option value="2019" class="form-control input-lg text-success">2019</option>
+                    <option value="2020" class="form-control input-lg text-success">2020</option>
+                    <option value="2021" class="form-control input-lg text-success">2021</option>
+                    <option value="2022" class="form-control input-lg text-success">2022</option>
+                    <option value="2023" class="form-control input-lg text-success">2023</option>
+                    <option value="2024" class="form-control input-lg text-success">2024</option>
+                </select>
+                <button type="submit">Buscar</button>
+            </div>
             
-        </tbody>
-        <tfoot> 
-            <tr >
-                <th  colspan="3" class="text-right text-success" alig>Total</th>
-                <td >@php
-                    echo($total);
-                @endphp</td>
-            </tr>
-        </tfoot>
+        </form>
+    </div>
+    
+</div>
+
+    <div>
+            <p><h1 class="text-center my-3">Resumen</h1> </p>
+
         
-    </table>
-    <table class="table">
-        <thead class="bg-light">
-            <th   colspan="3">Gastos</th>
-            <td  data-toggle="collapse" href="#gastos" role="button" aria-expanded="false" aria-controls="gastos" >Ver Gastos</td>
-        </thead>
-        <thead>
+        <table class="table">
+            <thead>
+                <th></th>
+                <th>Montos</th>
+            </thead>
             <tr >
-                <td  style="width:180px">Fecha</td>
-                <td  style="width:350px">Categoria</td>
-                <td  style="width:350px">Descripcion</td>
-                <td  style="width:250px">Total</td>
+                <td>Ventas</td>
+            <td>{{$sumaVentas}}</td>
             </tr>
-        </thead>
-        <tbody class="collapse multi-collapse" id="gastos">
-            
-            @php
-                 $total = 0;
-            @endphp
-            @foreach($expenses as $expense)
             <tr>
-                <td scope="row">{{date('d-m-Y',strtotime($expense->created_at))}}</td>
-                <th scope="row">{{$expense->name}} </th>
-                <td scope="row">{{$expense->description}}</td>
-                <td scope="row">{{$expense->totalAmount}}</td>
-                  
-                @php
-                 $total = $total + $expense->totalAmount;
-                @endphp                 
+                <td>Ingresos</td>
+            <td>{{$efectivoRecibido}}</td>
             </tr>
-            @endforeach
-            
-            
-        </tbody>
-        <tfoot> 
             <tr>
-                <th colspan="3" class="text-right text-danger" alig>Total</th>
-                <td>@php
-                    echo($total);
-                @endphp</td>
+                <td>Gastos</td>
+            <td>{{$sumaGastos}}</td>
             </tr>
-        </tfoot>
-        
-    </table>
+            <tr>
+                <td>
+                    Total
+                </td>
+                <td>
+                    @php
+                        $total = $efectivoRecibido - $sumaGastos
+                    @endphp
+                    {{$total}}
+                </td>
+            </tr>
+            
+        </table>
+
+    </div>
+    
     
    
 

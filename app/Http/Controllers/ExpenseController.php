@@ -17,8 +17,9 @@ class ExpenseController extends Controller
     {
         $expenses = DB::table('expenses')
             ->join('categories', 'expenses.category_id','=','categories.id')
+            ->select('expenses.*','categories.name')
             ->get();
-       // dd($expenses);
+       //dd($expenses);
         return view("expenses.index", compact('expenses'));
 
 

@@ -8,8 +8,8 @@
     <table class="table table-hover">
         <thead>
            
-            <th scope="row">Fecha</th>
-            <th scope="col">Producto</th>
+            <th scope="row" WIDTH="120px">Fecha</th>
+            <th scope="row" WIDTH="150px">N° de Orden</th>
             <th scope="col">Forma de Pago</th>
             <th scope="col">Debe</th>
             <th scope="col">Haber</th>
@@ -19,10 +19,13 @@
             @foreach($cuentaCorriente as $cuenta)
                 
                 <tr>
-                   
-                    <td scope="row">{{date('d-m-Y',strtotime($cuenta->date))}}</td>                    
-                    <td scope="row">{{$cuenta->sale['description']}}</td>
                     
+                    <td scope="row">{{date('d-m-Y',strtotime($cuenta->date))}}</td>
+
+                 <!--<td scope="row">{{$cuenta->sale['numberOfOrder']}}</td> -->
+                <td scope="row"  >
+                    <a href="/ventas/forOrder/{{$cuenta->sale_id}}" > {{$cuenta->sale['numberOfOrder']}} </a></td>
+
                 <td scope="row"><a href="/payments/{{$cuenta->payment_id}}" > {{$cuenta->payment['paymentForm']}} </a></td>
                     
                         

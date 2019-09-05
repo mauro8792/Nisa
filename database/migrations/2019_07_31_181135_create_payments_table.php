@@ -18,6 +18,7 @@ class CreatePaymentsTable extends Migration
             $table->integer('client_id')->unsigned();
             $table->string('paymentForm');
             $table->string('description')->nullable();
+            $table->date('date');
             //cantidad de plata que pague
             $table->float('payment', 8, 2);
             $table->timestamps();

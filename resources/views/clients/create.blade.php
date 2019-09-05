@@ -15,17 +15,17 @@
             </div>
             <div class="form-group col-md-6">
                 <label for="lastname">Apellido</label>
-                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Apellido" required>
+                <input type="text" class="form-control" name="lastname" id="lastname" placeholder="Apellido">
             </div>
         </div>
         <div class="form row">
             <div class="form-group col-md-6">
                 <label for="email">Email</label>
-                <input type="text" class="form-control" name="email" id="email" placeholder="Email" required>
+                <input type="text" class="form-control" name="email" id="email" placeholder="Email" >
             </div>
             <div class="form-group col-md-6">
                 <label for="telephone">Telefono </label>
-                <input type="text" class="form-control" name="telephone" id="telephone" placeholder="Teléfono" required>
+                <input type="text" class="form-control" name="telephone" id="telephone" placeholder="Teléfono" >
             </div>
         </div>
   <button type="submit" class="btn btn-primary">Guardar</button>

@@ -24,11 +24,6 @@
             
         </div>
         <div class="form-row">
-            
-            <div class="form-group col-md-6">
-                <label for="">Pago parcial: $</label>
-                <input type="number" name="totalAmount" class="form-control"  required>
-            </div>
             <div class="form-group col-md-6">
                 <label for="">Pago Total $</label>
                 <input type="number" name="totalPayment" class="form-control" required>

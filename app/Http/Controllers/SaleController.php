@@ -20,7 +20,10 @@ class SaleController extends Controller
         //$sales= Sale::all();
         $sales = DB::table('sales')
             ->join('clients', 'sales.client_id','=','clients.id')
+            ->join('accounts', 'sales.client_id','=','accounts.client_id')
+            ->select('sales.*', 'clients.name','accounts.id')
             ->get();
+        
         /*
         $f1 = $f2 = date('Y-m-d');
 
@@ -65,13 +68,24 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
+       // $users = DB::table('users')->select('name', 'email as user_email')->get();
+        $client = Client::find($request->input('client'));
+        $numeroDeOrden= $client->numberOfOrder;
+        $client->numberOfOrder = ($client["numberOfOrder"] +1);
+        $client->save();
+        
+        
         $sale = new Sale();
         //$sale->client_id = $request->input('client');
         $sale->client()->associate($request->input('client'));
         $sale->description =$request->input('description');
         $sale->senia = $request->input('senia');
         $sale->total= $request->input('total');
+        $sale->date = $request->input('date');
+        $sale->shortDescription = $request->input('shortDescription');
+        $sale->state = "Solicitado";
+        $sale->numberOfOrder = $numeroDeOrden;
         $sale->save();
 
         $account = new Account();
@@ -101,7 +115,7 @@ class SaleController extends Controller
      */
     public function show($id)
     {
-        //
+        return "hola bebe";
     }
 
     /**
@@ -112,7 +126,16 @@ class SaleController extends Controller
      */
     public function edit($id)
     {
-        //
+        $sale = Sale::where('id', $id)->first();
+        //dd($sale->client_id);
+        $client = Client::where('id', $sale->client_id)->first();
+        //dd($client->name);
+      /*  $sale = DB::table('sales')
+            ->join('clients', 'sales.client_id','=','clients.id')
+            ->where('sales.numberOfOrder','=',$forOrder)
+            ->get();*/
+        //dd($sale);
+        return view('sales.edit', compact('sale','client'));  
     }
 
     /**
@@ -122,9 +145,11 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Sale $sale)
     {
-        //
+        $sale->state = $request->state;
+        $sale->save();
+        return redirect()->route('sales.index', [$sale])->with('status', 'Sale update');
     }
 
     /**
@@ -136,5 +161,17 @@ class SaleController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function forOrder($id){
+        $sale = Sale::where('id', $id)->first();
+        //dd($sale->client_id);
+        $client = Client::where('id', $sale->client_id)->first();
+        //dd($client->name);
+      /*  $sale = DB::table('sales')
+            ->join('clients', 'sales.client_id','=','clients.id')
+            ->where('sales.numberOfOrder','=',$forOrder)
+            ->get();*/
+        //dd($sale);
+        return view('sales.show', compact('sale','client'));
     }
 }

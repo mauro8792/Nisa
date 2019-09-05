@@ -9,7 +9,7 @@
             <label for="">Seleccione el Cliente</label>
             <select class="form-control text-success" name="client" id="client">
                 @foreach($clients as $client)
-                    <option value="{{$client->id}}" class="form-control input-lg text-success">{{$client->name}}</option>
+                    <option value="{{$client->id}}" class="form-control input-lg text-success">{{$client->name}} - Número de Orden: {{$client->numberOfOrder}}</option>
                 @endforeach
             </select>
         </div>
@@ -17,7 +17,12 @@
             <div class="form-group col-md-6">
                 <label for="">Descripcion del Producto:</label>
                 <input type="text" name="description" class="form-control" required>
-                <i class=”fa fa-camera-retro fa-lg“></i> 
+                
+            </div>
+            <div class="form-group col-md-6">
+                <label for="shortDescription"> Producto:</label>
+                <input type="text" name="shortDescription" class="form-control" required>
+                
             </div>
             <div class="form-group col-md-6">
                 <label for="">Fecha:</label>
@@ -28,7 +33,7 @@
         <div class="form row">
             <div class="form-group col-md-6">
                 <label for="">Adelanto $</label>
-                <input type="text" name="senia" class="form-control" required>
+                <input type="text" name="senia" class="form-control" >
             </div>
         
             <div class="form-group col-md-6">

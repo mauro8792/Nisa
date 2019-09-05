@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Sale;
 use App\Account;
+use App\Payment;
+use App\Expense;
 use App\CurrentAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -17,15 +19,41 @@ class SummaryController extends Controller
      */
     public function index()
     {
-        $sales = DB::table('sales')
-            ->join('clients', 'sales.client_id','=','clients.id')
-            ->get();
-        $expenses = DB::table('expenses')
-            ->join('categories', 'expenses.category_id','=','categories.id')
-            ->get();
-        return view("summaries.index", compact("sales","expenses"));
-    }
+        $sumaVentas=0;
+        $sumaGastos=0;
+        $efectivoRecibido =0;
+        $sumaSenia =0;
+        $sumaPagos=0;
 
+        //Suma de Ventas
+        $ventas = Sale::whereMonth('date','=','9')->get();
+        foreach ($ventas as $venta) {
+            $sumaVentas =$sumaVentas+$venta->total;
+        }
+
+        //Suma de Gastos
+        $gastos = Expense::whereMonth('created_at','=','9')->get();
+        foreach ($gastos as $gasto) {
+            $sumaGastos =$sumaGastos+$gasto->totalPayment;
+        }
+
+        //Suma de senia
+        $senias = Sale::whereMonth('date','=','9')->get();
+        foreach ($senias as $senia) {
+            $sumaSenia =$sumaSenia+$senia->senia;
+        }
+
+        //Suma de pagos
+        $pagos = Payment::whereMonth('date','=','9')->get();
+        foreach ($pagos as $pago) {
+            $sumaPagos =$sumaPagos+ $pago->payment;
+        }
+
+        $efectivoRecibido = $sumaSenia+ $sumaPagos;
+       
+        return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
+    }
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -90,5 +118,33 @@ class SummaryController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function searchForDate(Request $request){
+       
+        $sumaVentas = Sale::whereBetween('date',[$request->init, $request->fin])
+                    ->sum('total');       
+        //Suma de Gastos
+        $sumaGastos = Expense::whereBetween('created_at',[$request->init, $request->fin])
+                ->sum('totalPayment');
+        //Suma de senia
+        $sumaSenia = Sale::whereBetween('date',[$request->init, $request->fin])
+                ->sum('senia');
+        //Suma de pagos
+        $sumaPagos = Payment::whereBetween('date',[$request->init, $request->fin])->sum('payment');
+
+        $efectivoRecibido = $sumaSenia+ $sumaPagos;
+       
+        return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
+    }
+
+    public function searchForMonth(Request $request){
+        $sumaVentas= Sale::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('total');
+        $sumaGastos= Expense::whereYear('created_at','=',$request->age)->whereMonth('created_at','=',$request->month)->sum('totalPayment');
+        $sumaSenia = Sale::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('senia');
+        $sumaPagos= Payment::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('payment');
+        $efectivoRecibido = $sumaSenia + $sumaPagos;
+       
+        return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
     }
 }
