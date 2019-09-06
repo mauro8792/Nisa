@@ -51,3 +51,7 @@ Route::prefix('/resumen')->name('summary.')->group(function(){
     Route::post('/searchForDate', 'SummaryController@searchForDate')->name('searchForDate');
     Route::post('/searchForMonth', 'SummaryController@searchForMonth')->name('searchForMonth');
 });
+
+Route::get('error', function(){ 
+    abort(500);
+});

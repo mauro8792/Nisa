@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Category;
 use App\Expense;
+use App\Client;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

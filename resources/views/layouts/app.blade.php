@@ -10,10 +10,27 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
         <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+        <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+       
     </head>
-    <body  > 
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <style>
+         footer {
+      background: rgba(0, 0, 0, 0.8);
+      color: white;
+      position: fixed;
+      left:0px;
+      bottom:0px;
+      height:30px;
+      width:100%;
+
+    }
+    nav {
+      color: white;  
+    }
+    </style>
+    <body class="fondo2 "  >
+        
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="  padding-right: 0px; padding-left: 15px;" >
             <a class="navbar-brand" href="http://localhost:8000/">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -29,7 +46,7 @@
                             <a class="dropdown-item" href="{{route('clients.index')}}">Ver todos..</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('clients.create')}}">Nuevo Cliente</a>                            
-                            <a class="dropdown-item" href="#">Something else here</a>
+                           
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -40,7 +57,7 @@
                             <a class="dropdown-item" href="{{route('employees.index')}}">Ver todos..</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('employees.create')}}">Nuevo Empleado</a>                            
-                            <a class="dropdown-item" href="#">Something else here</a>
+                            
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -48,11 +65,12 @@
                         Gastos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownGastos">
+                            <a class="dropdown-item" href="#">Ver gasto por categoria</a>
+                            <a class="dropdown-item" href="{{route('expenses.index')}}">Ver gastos</a>
+                            <a class="dropdown-item" href="{{route('categories.index')}}">Ver Categorias</a>
+                            <div class="dropdown-divider"></div>                            
                             <a class="dropdown-item" href="{{route('expenses.create')}}">Nuevo Gasto</a>
                             <a class="dropdown-item" href="{{route('categories.create')}}">Nueva Categoria</a>
-                            <a class="dropdown-item" href="{{route('categories.index')}}">Ver Categorias</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="#">Ver gasto por categoria</a>
                         </div>
                     </li>
                      <li class="nav-item dropdown">
@@ -60,11 +78,19 @@
                         Pagos/Ventas
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownPagos">
-                            <a class="dropdown-item" href="{{route('payments.create')}}">Nuevo Pago</a>
-                            <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pago</a>
+                            
+                            <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pagos</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{route('sales.create')}}">Nueva Venta</a>
-                            <a class="dropdown-item" href="{{route('sales.index')}}">Ver ventas</a>
+                            
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownPagos" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                       Ordenes de Pedido
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdownPagos">
+                            <a class="dropdown-item" href="{{route('sales.index')}}">Ver Pedidos</a>
                             
                         </div>
                     </li>
@@ -74,10 +100,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownResumen">
                             <a class="dropdown-item" href="{{route('summaries.index')}}">Resumen x mes</a>
-                            <a class="dropdown-item" href="{{route('payments.index')}}">Ver  Pago</a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{route('sales.create')}}">Nueva Venta</a>
-                            <a class="dropdown-item" href="{{route('sales.index')}}">Ver ventas</a>
+                            
                             
                         </div>
                     </li>
@@ -88,4 +111,13 @@
             @yield('content')
         </div>
     </body>
+    <footer id="footer" class= "navbar-dark bg-dark text-right" style="padding-bottom: 40px">
+        <div class="container ">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-4">
+                    <h2  style="font-size: 20px">&copy; 2019  All Rights Reserved.</h2>
+                </div>
+            </div>
+        </div>
+    </footer>
 </html>

@@ -7,7 +7,7 @@ use App\Account;
 use App\CurrentAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-
+use App\Http\Requests\StoreSaleRequest;
 class SaleController extends Controller
 {
     /**
@@ -17,36 +17,14 @@ class SaleController extends Controller
      */
     public function index(Request $request)
     {
-        //$sales= Sale::all();
+       
+
         $sales = DB::table('sales')
             ->join('clients', 'sales.client_id','=','clients.id')
-            ->join('accounts', 'sales.client_id','=','accounts.client_id')
-            ->select('sales.*', 'clients.name','accounts.id')
+            ->select('sales.*', 'clients.name')
             ->get();
+    
         
-        /*
-        $f1 = $f2 = date('Y-m-d');
-
-        if(!is_null($request->fechaInicial) && !empty($request->fechaInicial) && !is_null($request->fechaFinal) || !empty($request->fechaFinal)){
-            $f1 = $request->fechaInicial;
-            $f2 = $request->fechaFinal;
-        }
-        
-        $sales = DB::table('sales')
-            ->join('clients', 'sales.client_id','=','clients.id')
-            ->whereBetween('created_at', [$f1, $f2])
-            ->get();
-
-*/
-
-
-
-
-
-
-
-
-        //var_dump($sales);
         return view ('sales.index', compact('sales'));
     }
 
@@ -58,7 +36,7 @@ class SaleController extends Controller
     public function create(Request $request)
     {
         $clients = Client::all();
-        return view ('sales.create', compact('clients'));
+        return view ('sales.create', compact('clients'));       
     }
 
     /**
@@ -67,7 +45,7 @@ class SaleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSaleRequest $request)
     {   
        // $users = DB::table('users')->select('name', 'email as user_email')->get();
         $client = Client::find($request->input('client'));

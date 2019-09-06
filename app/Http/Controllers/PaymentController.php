@@ -5,6 +5,7 @@ use App\Client;
 use App\Account;
 use App\Payment;
 use App\CurrentAccount;
+use Illuminate\Support\Facades\DB;
 
 use Illuminate\Http\Request;
 
@@ -16,10 +17,13 @@ class PaymentController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {
-        $clients = Client::all();
-        //return "hola wacho";
-        return view ('payments.index', compact('clients'));
+    {       
+        $payments = DB::table('payments')
+            ->join('clients', 'payments.client_id','=','clients.id')
+            ->select('payments.*','clients.name','clients.lastName')
+            ->get();
+        //dd($payments);
+        return view ('payments.index', compact('payments'));
     }
 
     /**
@@ -27,12 +31,7 @@ class PaymentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Payment $client)
-    {
-        //dd($client->id);
-        $clients = Client::all();
-        return view ('payments.create', compact('clients'));
-    }
+    
 
     /**
      * Store a newly created resource in storage.

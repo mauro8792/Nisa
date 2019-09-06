@@ -3,10 +3,15 @@
 @section('title', 'Sales')
 
 @section('content')
+<script>
+        $(document).ready(function() {
+             $('#example').DataTable();
+        } );
+    </script>
     <p><h1 class="text-center my-3">Ordenes de Pedido</h1> </p>
    <section>
    
-    <table class="table text-center">
+    <table  id="example"class="display table text-center">
         <thead>
             <th scope="col">Fecha</th>
             <th scope="col">Cliente </th>
@@ -33,7 +38,7 @@
                     >
                         {{$sale->name}}
                     </th>
-                    
+                     
                     <td scope="row">
                         <a href="/ventas/forOrder/{{$sale->id}}" > {{$sale->numberOfOrder}} </a></td>
                     <td scope="row">{{$sale->shortDescription}}</td>
