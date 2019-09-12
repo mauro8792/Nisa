@@ -11,6 +11,7 @@
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
         <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
+        
        
     </head>
     <style>

@@ -52,6 +52,15 @@ Route::prefix('/resumen')->name('summary.')->group(function(){
     Route::post('/searchForMonth', 'SummaryController@searchForMonth')->name('searchForMonth');
 });
 
+Route::resource('expenses', 'ExpenseController');
+Route::prefix('/gastos')->name('expenses.')->group(function(){
+    Route::get('/','ExpenseController@index')->name('index');
+    Route::get('/nuevo','ExpenseController@create')->name('create');
+    Route::get('/gastos/{id}/edit','ExpenseController@edit')->name('edit');
+    Route::post('/searchForCategory','ExpenseController@searchForCategory')->name('searchForCategory');
+
+});
+
 Route::get('error', function(){ 
     abort(500);
 });

@@ -3,6 +3,13 @@
 @section('title', 'Create client')
 
 @section('content')
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg)) 
+    
+    <div class="alert alert-danger alert-dismissible">
+        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+        <strong>Cuidado! </strong>{{ Session::get('alert-' . $msg) }} ×
+    </div>
+    @endif @endforeach
     <p><h1 class="text-center my-3">Nuevo Cliente:</h1> </p>
     
     <form class="form-group mt-5"  method="POST" action="/clients">

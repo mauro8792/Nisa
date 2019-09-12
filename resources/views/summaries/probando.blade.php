@@ -6,6 +6,7 @@
     <script>
         $(document).ready(function() {
              $('#example').DataTable();
+            
         } );
     </script>
     <table id="example" class="display table" style="width:100%">

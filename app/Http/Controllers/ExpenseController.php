@@ -16,16 +16,14 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        $expenses = DB::table('expenses')
+        $categories = Category::all();
+        
+        $expenses = Expense::select('expenses.*', 'categories.name')
             ->join('categories', 'expenses.category_id','=','categories.id')
             ->select('expenses.*','categories.name')
             ->get();
-       //dd($expenses);
-        return view("expenses.index", compact('expenses'));
-
-
-
        
+        return view("expenses.index", compact('expenses','categories'));
     }
 
     /**
@@ -47,7 +45,6 @@ class ExpenseController extends Controller
      */
     public function store(Request $request)
     {
-        //dd($request->all());
         $expense=Expense::create($request->all());
         return redirect()->route('expenses.index');
     }
@@ -95,5 +92,13 @@ class ExpenseController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function searchForCategory(Request $request){
+        $categories = Category::all();
+        $expenses = Expense::select('expenses.*', 'categories.name')
+            ->join('categories', 'expenses.category_id','=','categories.id')
+            ->where('categories.id','=',$request->category)
+            ->get();
+        return view("expenses.index", compact('expenses','categories'));
     }
 }

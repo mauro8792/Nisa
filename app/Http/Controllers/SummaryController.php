@@ -19,38 +19,13 @@ class SummaryController extends Controller
      */
     public function index()
     {
-        $sumaVentas=0;
-        $sumaGastos=0;
-        $efectivoRecibido =0;
-        $sumaSenia =0;
-        $sumaPagos=0;
-
-        //Suma de Ventas
-        $ventas = Sale::whereMonth('date','=','9')->get();
-        foreach ($ventas as $venta) {
-            $sumaVentas =$sumaVentas+$venta->total;
-        }
-
-        //Suma de Gastos
-        $gastos = Expense::whereMonth('created_at','=','9')->get();
-        foreach ($gastos as $gasto) {
-            $sumaGastos =$sumaGastos+$gasto->totalPayment;
-        }
-
-        //Suma de senia
-        $senias = Sale::whereMonth('date','=','9')->get();
-        foreach ($senias as $senia) {
-            $sumaSenia =$sumaSenia+$senia->senia;
-        }
-
-        //Suma de pagos
-        $pagos = Payment::whereMonth('date','=','9')->get();
-        foreach ($pagos as $pago) {
-            $sumaPagos =$sumaPagos+ $pago->payment;
-        }
-
+        $mesActual= date('m');
+        $sumaVentas= Sale::whereMonth('date','=',$mesActual)->sum('total');
+        $sumaGastos= Expense::whereMonth('created_at','=',$mesActual)->sum('totalPayment');
+        $sumaSenia = Sale::whereMonth('date','=',$mesActual)->sum('senia');
+        $sumaPagos= Payment::whereMonth('date','=',$mesActual)->sum('payment');
         $efectivoRecibido = $sumaSenia+ $sumaPagos;
-       
+        
         return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
     }
     

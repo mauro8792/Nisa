@@ -51,21 +51,29 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        $client = new Client();
-        $client->name = $request->input('name');
-        $client->lastname = $request->input('lastname');
-        $client->telephone =$request->input('telephone');
-        $client->email = $request->input('email');
-        $client->slug = $request->input('name');
-        $client->numberOfOrder=1;
-        $client->save();
-        //Creamos la cuenta y se la asignamos al cliente
-        $account = new Account();
-        $account->client_id= $client->id;
-        $account->client()->associate($client->id);
-        $account->save();
-        return redirect()->route('clients.index');
+        if (!Client::where('name','=',$request->input('name'))->exists()) {
+            $client = new Client();
+            $client->name = $request->input('name');
+            $client->lastname = $request->input('lastname');
+            $client->telephone =$request->input('telephone');
+            $client->email = $request->input('email');
+            $client->slug = $request->input('name');
+            $client->numberOfOrder=1;
+            $client->save();
+            //Creamos la cuenta y se la asignamos al cliente
+            $account = new Account();
+            $account->client_id= $client->id;
+            $account->client()->associate($client->id);
+            $account->save();
+            return redirect()->route('clients.index');
+        }
+        else{
+            $request->session()->flash('alert-success', 'El cliente con ese nombre ya existe!');
+            return redirect()->route('clients.create');
+        }
+      
     }
+  
 
     /**
      * Display the specified resource.

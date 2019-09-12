@@ -6,6 +6,7 @@
 <script>
         $(document).ready(function() {
              $('#example').DataTable();
+             
         } );
     </script>
     <p><h1 class="text-center my-3">Ordenes de Pedido</h1> </p>
