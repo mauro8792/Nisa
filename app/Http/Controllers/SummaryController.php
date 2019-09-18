@@ -19,6 +19,7 @@ class SummaryController extends Controller
      */
     public function index()
     {
+        //whereDate()
         $mesActual= date('m');
         $sumaVentas= Sale::whereMonth('date','=',$mesActual)->sum('total');
         $sumaGastos= Expense::whereMonth('created_at','=',$mesActual)->sum('totalPayment');

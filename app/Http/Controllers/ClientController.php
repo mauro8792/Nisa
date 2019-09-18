@@ -6,6 +6,8 @@ use App\Account;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
+
+//domweb host
 class ClientController extends Controller
 {
     /**
@@ -15,22 +17,10 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {
-        //$clients = Client::all();
-         /* $clients = Client::with(['account'=>function($query){
-            $query->select('id', 'accountTotal')
-        ->where('id','=',$clients->id);
-        }])->get();
-        dd($clients);
-*/
         $clients = DB::table('clients')
             ->join('accounts', 'clients.id', '=', 'accounts.client_id')
-            //->select('users.id', 'contacts.phone', 'orders.price')
             ->get();
-            //dd($clients);
-        return view('summaries.probando', compact('clients'));
-        //return view('clients.index', compact('clients'));
-
-        
+        return view('summaries.probando', compact('clients'));        
     }
 
     /**
@@ -50,7 +40,7 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
+    {   
         if (!Client::where('name','=',$request->input('name'))->exists()) {
             $client = new Client();
             $client->name = $request->input('name');

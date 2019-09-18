@@ -22,7 +22,6 @@ class PaymentController extends Controller
             ->join('clients', 'payments.client_id','=','clients.id')
             ->select('payments.*','clients.name','clients.lastName')
             ->get();
-        //dd($payments);
         return view ('payments.index', compact('payments'));
     }
 
@@ -112,11 +111,9 @@ class PaymentController extends Controller
     {
         //
     }
-    public function newPayment($id){
-         
+    public function newPayment($id){ 
         $cliente = Client::where('id', $id)->first();
         $account = Account::where('client_id', $cliente->id)->first();
-        
         return view('payments.createPayment', compact('cliente','account'));
     }
 }

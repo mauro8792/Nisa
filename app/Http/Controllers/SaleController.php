@@ -17,15 +17,11 @@ class SaleController extends Controller
      */
     public function index(Request $request)
     {
-       
-
-        $sales = DB::table('sales')
+       $sales = DB::table('sales')
             ->join('clients', 'sales.client_id','=','clients.id')
             ->select('sales.*', 'clients.name')
             ->get();
-    
-        
-        return view ('sales.index', compact('sales'));
+       return view ('sales.index', compact('sales'));
     }
 
     /**
@@ -47,7 +43,6 @@ class SaleController extends Controller
      */
     public function store(StoreSaleRequest $request)
     {   
-       // $users = DB::table('users')->select('name', 'email as user_email')->get();
         $client = Client::find($request->input('client'));
         $numeroDeOrden= $client->numberOfOrder;
         $client->numberOfOrder = ($client["numberOfOrder"] +1);
@@ -55,7 +50,6 @@ class SaleController extends Controller
         
         
         $sale = new Sale();
-        //$sale->client_id = $request->input('client');
         $sale->client()->associate($request->input('client'));
         $sale->description =$request->input('description');
         $sale->senia = $request->input('senia');
@@ -105,14 +99,8 @@ class SaleController extends Controller
     public function edit($id)
     {
         $sale = Sale::where('id', $id)->first();
-        //dd($sale->client_id);
         $client = Client::where('id', $sale->client_id)->first();
-        //dd($client->name);
-      /*  $sale = DB::table('sales')
-            ->join('clients', 'sales.client_id','=','clients.id')
-            ->where('sales.numberOfOrder','=',$forOrder)
-            ->get();*/
-        //dd($sale);
+        
         return view('sales.edit', compact('sale','client'));  
     }
 
@@ -142,14 +130,7 @@ class SaleController extends Controller
     }
     public function forOrder($id){
         $sale = Sale::where('id', $id)->first();
-        //dd($sale->client_id);
         $client = Client::where('id', $sale->client_id)->first();
-        //dd($client->name);
-      /*  $sale = DB::table('sales')
-            ->join('clients', 'sales.client_id','=','clients.id')
-            ->where('sales.numberOfOrder','=',$forOrder)
-            ->get();*/
-        //dd($sale);
         return view('sales.show', compact('sale','client'));
     }
 }

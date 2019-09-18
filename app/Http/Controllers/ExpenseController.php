@@ -17,12 +17,10 @@ class ExpenseController extends Controller
     public function index()
     {
         $categories = Category::all();
-        
         $expenses = Expense::select('expenses.*', 'categories.name')
             ->join('categories', 'expenses.category_id','=','categories.id')
             ->select('expenses.*','categories.name')
             ->get();
-       
         return view("expenses.index", compact('expenses','categories'));
     }
 

@@ -37,7 +37,6 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = Employee::create($request->all());
-        //$employee = new Employee(Input::all());
         return redirect()->route('employees.index');
     }
 

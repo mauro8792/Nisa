@@ -47,18 +47,10 @@ class CurrentAccountController extends Controller
      */
     public function show(CurrentAccount $currentaccount)
     {
-        //dd($currentaccount->id);
         $account = new Account();
         $account = Account::where('client_id', $currentaccount->client_id);
-        //dd($currentaccount);
-        //dd($account);
         $cuentaCorriente = CurrentAccount::where('account_id', $currentaccount->account_id)->get();
-        //dd($cuentaCorriente);
-        //var_dump($request->id);
-        //dd($account);
-        return view('currentaccounts.show',  compact('cuentaCorriente','account'));
-
-        
+        return view('currentaccounts.show',  compact('cuentaCorriente','account'));        
     }
 
     /**
