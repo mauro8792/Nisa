@@ -6,8 +6,8 @@
 
 <nav class="navbar navbar-light bg-light" style="margin-top: 5%;">
   
-  <div class="container row">
-    <div class="container-row">
+  <div class="container">
+    <div class="row">
         <form method="POST" action="/resumen/searchForDate" class="form-inline" > 
             @csrf
             <div style="display: flex">
@@ -19,7 +19,7 @@
             </div>            
         </form>
     </div>
-    <div class="container-row"> 
+    <div class="row"> 
         <form method="POST" action="/resumen/searchForMonth" class="form-inline" style="display: -webkit-inline-box;" >
             @csrf
             <div style="display: flex; margin-top: 6%;">

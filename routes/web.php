@@ -64,3 +64,7 @@ Route::prefix('/gastos')->name('expenses.')->group(function(){
 Route::get('error', function(){ 
     abort(500);
 });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

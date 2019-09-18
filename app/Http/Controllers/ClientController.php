@@ -16,7 +16,8 @@ class ClientController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+        $request->user()->authorizeRoles(['admin']);
         $clients = DB::table('clients')
             ->join('accounts', 'clients.id', '=', 'accounts.client_id')
             ->get();
