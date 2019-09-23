@@ -3,6 +3,7 @@
 @section('title', 'Clients')
 
 @section('content')
+
     <h1 class="text-center my-3">Lista de Empleados</h1>
 
     <table class="table">
@@ -19,12 +20,13 @@
         <tbody>
             @foreach($employees as $employee)
                 <tr>
-                    <th scope="row">{{$employee->name}} <i class="fas fa-camera-retro fa-lg"></i></th>
+                    <th scope="row">{{$employee->name}}</th>
                     <td scope="row">{{$employee->lastname}}</td>
                     <td scope="row">{{$employee->adress}}</td>
                     <td scope="row">{{$employee->telephone}}</td>
                     <td scope="row">{{$employee->starDate}}</td>
-                    <td scope="row">{{$employee->salary}}</td>
+                    <td scope="row" >{{$employee->salary}}
+                    </td>
                     
                     <td><a href="/employees/{{$employee->id}}" class="btn btn-primary">Editar</a> </td>
                     <td> <form method="POST" action="/employees/{{$employee->id}}">

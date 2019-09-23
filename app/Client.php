@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     protected $filliable = ['name', 'lastname','telephone'
-        ,'email','slug','numberOfOrder'];
+        ,'email','numberOfOrder','slug',];
 
     public function account()
     {
@@ -21,5 +21,9 @@ class Client extends Model
     public function sales()
     {
         return $this->hasMany('App\Sale');
+    }
+    public function getRouteKeyName()
+    {
+        return 'slug';
     }
 }

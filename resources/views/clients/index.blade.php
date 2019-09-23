@@ -1,29 +1,42 @@
 @extends('layouts.app')
 
-@section('title', 'Clients')
+@section('title', 'Clientes')
 
 @section('content')
-    <p><h1 class="text-center my-3">Lista de Clientes</h1> </p>
-
-    <table class="table">
+    <script>
+        $(document).ready(function() {
+             $('#example').DataTable();
+            
+        } );
+    </script>
+    @foreach (['danger', 'warning', 'success', 'info'] as $msg)
+        @if(Session::has('alert-' . $msg)) 
+            <div class="alert alert-danger alert-dismissible">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+             <strong>Cuidado! </strong>{{ Session::get('alert-' . $msg) }} ×
+            </div>
+        @endif
+    @endforeach
+    <h1 class="my-4 text-center">Listado de Clientess</h1>
+    <table id="example" class="display table" style="width:100%">
         <thead>
-            <th scope="col">Name  </th>
-            <th scope="col">LastName</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
             <th scope="col">Email</th>
-            <th scope="col">Telephone</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Editar</th>
             <th scope="col">Estado de cuenta </th>
             <th scope="col">Realizar pago</th>
         </thead>
         <tbody>
             @foreach($clients as $client)
                 <tr>
-                    <td scope="row">{{$client->name}} </td>
+                    <th scope="row">{{$client->name}} </th>
                     <td scope="row">{{$client->lastname}}</td>
                     <td scope="row">{{$client->email}}</td>
                     <td scope="row">{{$client->telephone}}</td>
                     
-                    <td><a href="/clients/{{$client->id}}" class="btn btn-primary">Editar</a> </td>
+                    <td><a href="/clients/{{$client->slug}}/edit" class="btn btn-primary">Editar</a> </td>
                     <td><a href="/accounts/{{$client->id}}" class="btn btn-info">Ver más..</a> </td>
                     
                     @if ($client->accountTotal != 0)
@@ -35,7 +48,6 @@
             @endforeach
         </tbody>
     </table>
-    
-   
 
 @endsection
+        

@@ -10,6 +10,10 @@ use Illuminate\Support\Facades\DB;
 //domweb host
 class ClientController extends Controller
 {
+
+    public function __construct(){
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -18,6 +22,7 @@ class ClientController extends Controller
     public function index(Request $request)
     {   
         $request->user()->authorizeRoles(['admin']);
+        
         $clients = DB::table('clients')
             ->join('accounts', 'clients.id', '=', 'accounts.client_id')
             ->get();
@@ -61,6 +66,7 @@ class ClientController extends Controller
         else{
             $request->session()->flash('alert-success', 'El cliente con ese nombre ya existe!');
             return redirect()->route('clients.create');
+            
         }
       
     }
@@ -83,9 +89,9 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Client $client)
     {
-        //
+        return view('clients.edit', compact('client'));
     }
 
     /**
@@ -95,9 +101,23 @@ class ClientController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Client $client)
     {
-        //
+        if (!Client::where('name','=',$request->input('name'))->exists()) {
+            $client->name = $request->input('name');
+            $client->lastname = $request->input('lastname');
+            $client->telephone =$request->input('telephone');
+            $client->email = $request->input('email');
+            $client->slug = $request->input('name');
+            $client->numberOfOrder = $client->numberOfOrder;
+            $client->save();
+            return redirect()->route('clients.index');
+        }
+        else{
+            $request->session()->flash('alert-success', 'El cliente con ese nombre ya existe!');
+            return redirect()->route('clients.index');
+        }
+        
     }
 
     /**
