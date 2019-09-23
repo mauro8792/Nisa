@@ -23,7 +23,7 @@
             </form>
         </div>
         <div class="col-lg-6">
-            <form method="POST" action="/resumen/searchForDate" class="form-inline" > 
+            <form method="POST" action="/gastos/searchForDate" class="form-inline" > 
                 @csrf
                 <div style="display: flex">
                     <label for="inicial" class="text-dark mr-2">Desde</label>
@@ -42,7 +42,7 @@
             <table class="table">
                 <thead>
                     <th scope="col">Categoria </th>
-                    <th scope="col">descripcion</th>
+                    <th scope="col">Descripción</th>
                     <th scope="col">Costo Total</th>
                     
                     <th scope="col">Fecha</th>
@@ -54,7 +54,7 @@
                             <th scope="row">{{$expense->name}} </th>
                             <td scope="row">{{$expense->description}}</td>
                             <td scope="row">{{$expense->totalPayment}}</td>
-                            <td scope="row">{{$expense->created_at}}</td>
+                            <td scope="row">{{date('d-m-Y',strtotime($expense->created_at))}}</td>
                         </tr>
                     @endforeach
                 </tbody>

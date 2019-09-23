@@ -97,21 +97,37 @@ class SummaryController extends Controller
     }
 
     public function searchForDate(Request $request){
-       
-        $sumaVentas = Sale::whereBetween('date',[$request->init, $request->fin])
-                    ->sum('total');       
-        //Suma de Gastos
-        $sumaGastos = Expense::whereBetween('created_at',[$request->init, $request->fin])
-                ->sum('totalPayment');
-        //Suma de senia
-        $sumaSenia = Sale::whereBetween('date',[$request->init, $request->fin])
-                ->sum('senia');
-        //Suma de pagos
-        $sumaPagos = Payment::whereBetween('date',[$request->init, $request->fin])->sum('payment');
 
-        $efectivoRecibido = $sumaSenia+ $sumaPagos;
+        if($request->init == $request->fin){
+            $sumaVentas = Sale::whereDate('date', $request->fin)->sum('total');       
+            //Suma de Gastos
+            $sumaGastos = Expense::whereDate('created_at', $request->fin)->sum('totalPayment');
+            //Suma de senia
+            $sumaSenia = Sale::whereDate('date',$request->fin)->sum('senia');
+            //Suma de pagos
+            $sumaPagos = Payment::whereDate('date',$request->fin)->sum('payment');
+
+            $efectivoRecibido = $sumaSenia+ $sumaPagos;
+        
+            return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
+        }else {
+            $sumaVentas = Sale::whereBetween('date',[$request->init, $request->fin])
+                    ->sum('total');       
+            //Suma de Gastos
+            $sumaGastos = Expense::whereBetween('created_at',[$request->init, $request->fin])
+                    ->sum('totalPayment');
+            //Suma de senia
+            $sumaSenia = Sale::whereBetween('date',[$request->init, $request->fin])
+                    ->sum('senia');
+            //Suma de pagos
+            $sumaPagos = Payment::whereBetween('date',[$request->init, $request->fin])->sum('payment');
+
+            $efectivoRecibido = $sumaSenia+ $sumaPagos;
        
-        return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
+            return view("summaries.index", compact("sumaVentas","sumaGastos",'efectivoRecibido'));
+        }
+       
+        
     }
 
     public function searchForMonth(Request $request){

@@ -58,6 +58,7 @@ Route::prefix('/gastos')->name('expenses.')->middleware(['auth'])->group(functio
     Route::get('/nuevo','ExpenseController@create')->name('create');
     Route::get('/gastos/{id}/edit','ExpenseController@edit')->name('edit');
     Route::post('/searchForCategory','ExpenseController@searchForCategory')->name('searchForCategory');
+    Route::post('/searchForDate', 'ExpenseController@searchForDate')->name('searchForDate');
 
 });
 

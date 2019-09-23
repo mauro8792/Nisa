@@ -17,10 +17,15 @@ class ExpenseController extends Controller
     public function index()
     {
         $categories = Category::all();
+        $mesActual= date('m');
+        //$expenses= Expense::whereMonth('created_at','=',$mesActual);
+        
         $expenses = Expense::select('expenses.*', 'categories.name')
             ->join('categories', 'expenses.category_id','=','categories.id')
             ->select('expenses.*','categories.name')
+            ->whereMonth('expenses.created_at','=', $mesActual)
             ->get();
+        //dd($expenses);
         return view("expenses.index", compact('expenses','categories'));
     }
 
@@ -98,5 +103,23 @@ class ExpenseController extends Controller
             ->where('categories.id','=',$request->category)
             ->get();
         return view("expenses.index", compact('expenses','categories'));
+    }
+
+     public function searchForDate(Request $request){
+        
+        $categories = Category::all();
+        if($request->init == $request->fin){
+            $expenses = Expense::whereDate('expenses.created_at',$request->fin)
+                ->select('expenses.*', 'categories.name')
+                ->join('categories', 'expenses.category_id','=','categories.id')    
+                ->get();
+            return view("expenses.index", compact('expenses','categories'));
+        }else{      
+            $expenses = Expense::whereBetween('expenses.created_at',[$request->init, $request->fin])
+                ->select('expenses.*', 'categories.name')
+                ->join('categories', 'expenses.category_id','=','categories.id')    
+                ->get();
+            return view("expenses.index", compact('expenses','categories'));
+        }
     }
 }

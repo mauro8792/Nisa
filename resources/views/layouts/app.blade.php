@@ -144,14 +144,15 @@
         <div class="container">
             @yield('content')
         </div>
-    </body>
-    <footer id="footer" class= "navbar-dark bg-dark text-right" style="padding-bottom: 40px">
-        <div class="container ">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-4">
-                    <h2  style="font-size: 20px">&copy; 2019  All Rights Reserved.</h2>
+        <footer id="footer" class= "navbar-dark bg-dark text-right" style="padding-bottom: 40px">
+            <div class="container ">
+                <div class="row">
+                    <div class="col-md-8 col-md-offset-4">
+                        <h2  style="font-size: 20px">&copy; 2019  All Rights Reserved.</h2>
+                    </div>
                 </div>
             </div>
-        </div>
-    </footer>
+        </footer>
+    </body>
+    
 </html>
