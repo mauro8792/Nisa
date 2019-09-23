@@ -1,29 +1,23 @@
 @extends('layouts.app')
 
-@section('title', 'Create Category')
+@section('title', 'Edit Category')
 
 @section('content')
-    @foreach (['danger', 'warning', 'success', 'info'] as $msg) @if(Session::has('alert-' . $msg)) 
-    
-    <div class="alert alert-danger alert-dismissible">
-        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-        <strong>Cuidado! </strong>{{ Session::get('alert-' . $msg) }} ×
-    </div>
-    @endif @endforeach
     <p><h1 class="text-center my-3">Nuevo Categoria</h1> </p>
     
-    <form class="form-group mt-5"  method="POST" action="/categories">
+    <form class="form-group mt-5"  method="POST" action="/categories/{{$category->slug}}">
+        @method('PUT')
         @csrf
         <div class="form-row">
             <div class="form-group col-lg-6 offset-lg-3">
                 <label for="name" class="font-weight-bold">Nombre de la Categoria </label>
-                <input type="text" class="form-control" name="name" id="name" placeholder="Nombre" required>
+                <input type="text" class="form-control" name="name" id="name" value="{{$category->name}}" required>
             </div>
         </div>
         <div class="form-row">
             <div class="form-group col-lg-6 offset-lg-3">
                 <label for="description" class="font-weight-bold">Descripcion</label>
-                <input type="text" class="form-control" name="description" id="description" placeholder="Descripcion" required >
+                <input type="text" class="form-control" name="description" id="description" value="{{$category->description}}" required >
             </div>
         </div>
         <div class="form-row">

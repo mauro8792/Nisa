@@ -68,7 +68,6 @@
                         Gastos
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownGastos">
-                            <a class="dropdown-item" href="#">Ver gasto por categoria</a>
                             <a class="dropdown-item" href="{{route('expenses.index')}}">Ver gastos</a>
                             <a class="dropdown-item" href="{{route('categories.index')}}">Ver Categorias</a>
                             <div class="dropdown-divider"></div>                            

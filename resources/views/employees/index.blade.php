@@ -28,8 +28,8 @@
                     <td scope="row" >{{$employee->salary}}
                     </td>
                     
-                    <td><a href="/employees/{{$employee->id}}" class="btn btn-primary">Editar</a> </td>
-                    <td> <form method="POST" action="/employees/{{$employee->id}}">
+                    <td><a href="/employees/{{$employee->slug}}/edit" class="btn btn-primary">Editar</a> </td>
+                    <td> <form method="POST" action="/employees/{{$employee->slug}}">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                      <button type="submit" class="btn btn-danger">Eliminar</button> </form>

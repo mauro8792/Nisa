@@ -35,8 +35,15 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $category = Category::create($request->all());
-        return redirect()->route('categories.index');
+        if (!Category::where('name','=',$request->input('name'))->exists()) {
+            $category = Category::create($request->all());
+            $category->slug = $category->name;
+            return redirect()->route('categories.index');
+        }
+        else{
+            $request->session()->flash('alert-success', 'La categoria con ese nombre ya existe!');
+            return redirect()->route('categories.create');
+        }
     }
 
     /**
@@ -56,9 +63,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('categories.edit', compact('category'));
     }
 
     /**
@@ -68,9 +75,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        if (!Category::where('name','=',$request->input('name'))->exists()) {
+            $category->fill($request->all());
+            $category->slug = $category->name;
+            $category->save();
+            return redirect()->route('categories.index');
+        }
+        else{
+            $request->session()->flash('alert-success', 'La categoria con ese nombre ya existe!');
+            return redirect()->route('categories.index');
+        }
     }
 
     /**
@@ -79,8 +95,9 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        $category->delete();
+        return redirect()->route('categories.index');
     }
 }

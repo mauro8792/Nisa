@@ -37,6 +37,8 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         $employee = Employee::create($request->all());
+        $employee->slug= $employee->name;
+        $employee->save();
         return redirect()->route('employees.index');
     }
 
@@ -46,7 +48,7 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Employee $employee)
     {
         //
     }
@@ -57,9 +59,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Employee $employee)
     {
-        //
+        return view('employees.edit', compact('employee'));
     }
 
     /**
@@ -69,9 +71,13 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Employee $employee)
     {
-        //
+        $employee->fill($request->all());
+        $employee->slug= $employee->name;
+        $employee->save();
+        return redirect()->route('employees.index');
+        
     }
 
     /**
@@ -80,8 +86,9 @@ class EmployeeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Employee $employee)
     {
-        //
+        $employee->delete();
+        return redirect()->route('employees.index');
     }
 }

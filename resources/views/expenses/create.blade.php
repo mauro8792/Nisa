@@ -26,7 +26,7 @@
         <div class="form-row">
             <div class="form-group col-lg-6 offset-lg-3">
                 <label for="" class="font-weight-bold">Pago Total $</label>
-                <input type="number" name="totalPayment" class="form-control" required>
+                <input type="number" step="any" name="totalPayment" class="form-control" required>
             </div>
         </div>
         <div class="form-row">

@@ -104,12 +104,8 @@ class ClientController extends Controller
     public function update(Request $request, Client $client)
     {
         if (!Client::where('name','=',$request->input('name'))->exists()) {
-            $client->name = $request->input('name');
-            $client->lastname = $request->input('lastname');
-            $client->telephone =$request->input('telephone');
-            $client->email = $request->input('email');
-            $client->slug = $request->input('name');
-            $client->numberOfOrder = $client->numberOfOrder;
+            $client->fill($request->all());
+            $client->slug= $client->name;
             $client->save();
             return redirect()->route('clients.index');
         }
