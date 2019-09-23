@@ -11,9 +11,9 @@
         <form method="POST" action="/resumen/searchForDate" class="form-inline" > 
             @csrf
             <div style="display: flex">
-                <label style="margin-right: 2%" for="inicial">Desde</label>
+                <label for="inicial" class="text-dark mr-2">Desde</label>
                 <input class="form-control mr-sm-2" type="date" name="init">
-                <label style="margin-right: 2%" for="inicial">Hasta</label>
+                <label for="inicial" class="text-dark mr-2">Hasta</label>
                 <input class="form-control mr-sm-2" type="date" name="fin">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
             </div>            
@@ -43,7 +43,7 @@
                         <option value="12" class="form-control input-lg text-success">Diciembre</option>
                     </select>
                 </div>
-                <div class="input-group mb-4">
+                <div class="input-group mb-4 mx-3">
                     <div class="input-group-prepend">
                         <label class="input-group-text" for="inicial">Año</label>
                     </div>
@@ -68,8 +68,8 @@
     <div>
             <p><h1 class="text-center my-3">Resumen</h1> </p>
 
-        
-        <table class="table mx-auto" style="background: ghostwhite; text-align: center; width: 80%;">
+        <div class="table-responsive">
+            <table class="table mx-auto" style="text-align: center;">
             <thead>
                 <th></th>
                 <th>Montos</th>
@@ -94,8 +94,8 @@
                 <td>{{$total}}</td>
             </tr>
             
-        </table>
-
+            </table>
+        </div>
     </div>
     
     

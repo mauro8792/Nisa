@@ -3,17 +3,17 @@
 @section('title', 'Clients')
 
 @section('content')
-    <p><h1 class="text-center my-3">Lista de Empleados</h1> </p>
+    <h1 class="text-center my-3">Lista de Empleados</h1>
 
     <table class="table">
         <thead>
-            <th scope="col">Name  </th>
-            <th scope="col">LastName</th>
-            <th scope="col">Adress</th>
-            <th scope="col">Telephone</th>
-            <th scope="col">Star Date</th>
-            <th scope="col">Salary</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Nombre  </th>
+            <th scope="col">Apellido</th>
+            <th scope="col">Direccion</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Fecha de Inicio</th>
+            <th scope="col">Salario</th>
+            <th scope="col">Editar</th>
             <th scope="col">Eliminar</th>
         </thead>
         <tbody>

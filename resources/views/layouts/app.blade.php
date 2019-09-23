@@ -31,7 +31,7 @@
     <body class="fondo2 "  >
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="  padding-right: 0px; padding-left: 15px;" >
-            <a class="navbar-brand" href="http://localhost:8000/">Inicio</a>
+            <a class="navbar-brand" href="http://nisainteriores.com.ar/">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -116,9 +116,9 @@
                             <li class="nav-item">
                                 <a class="nav-link mr-4" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            <li class="nav-item">
+                            {{-- <li class="nav-item">
                                 <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li> 
+                            </li>  --}}
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

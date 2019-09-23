@@ -4,56 +4,60 @@
 
 @section('content')
 
-<nav class="navbar navbar-light bg-light" style="margin-top: 5%;">
-  
-  <div class="container row">
-    <div class="container-row"> 
-        <form method="POST" action="/gastos/searchForCategory" class="form-inline" style="display: -webkit-inline-box;" >
-            @csrf
-            <div >
-                <div class="input-group mb-4 ">
-                    <select class="form-control text-success" name="category" >
-                        @foreach ($categories as $category)
-                          <option value="{{$category->id}}">{{$category->name}}</option> 
-                        @endforeach
-                    </select>
-
+<nav class="navbar navbar-light bg-light mt-5 py-4">
+  <div class="container">
+    <div class="row"> 
+        <div class="col-lg-6">
+            <form method="POST" action="/gastos/searchForCategory" class="form-inline">
+                @csrf
+                <div >
+                    <div class="input-group">
+                        <select class="form-control text-success" name="category" >
+                            @foreach ($categories as $category)
+                                <option value="{{$category->id}}">{{$category->name}}</option> 
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-            </div>
-            <button style="margin-left: 2%;" class="btn btn-outline-success my-2 my-sm-0"     type="submit">Buscar</button>
-            
-        </form>
+                <button class="btn btn-outline-success ml-3"     type="submit">Buscar</button>
+            </form>
+        </div>
+        <div class="col-lg-6">
+            <form method="POST" action="/resumen/searchForDate" class="form-inline" > 
+                @csrf
+                <div style="display: flex">
+                    <label for="inicial" class="text-dark mr-2">Desde</label>
+                    <input class="form-control mr-sm-2" type="date" name="init">
+                    <label for="inicial" class="text-dark mr-2">Hasta</label>
+                    <input class="form-control mr-sm-2" type="date" name="fin">
+                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                </div>            
+            </form>      
+        </div>
     </div>
   </div>
 </nav>
-    <p><h1 class="text-center my-3">Lista de Gastos</h1> </p>
-
-    <table class="table">
-        <thead>
-            <th scope="col">Categoria </th>
-            <th scope="col">descripcion</th>
-            <th scope="col">Costo Total</th>
-            
-            <th scope="col">Fecha</th>
-            
-        </thead>
-        <tbody>
-            @foreach($expenses as $expense)
-                <tr>
-                    <th scope="row">{{$expense->name}} </th>
-                    <td scope="row">{{$expense->description}}</td>
-                    <td scope="row">{{$expense->totalPayment}}</td>
-                    <td scope="row">{{$expense->created_at}}</td>
+    <h1 class="text-center my-3">Lista de Gastos</h1>
+    <div class="table-responsive">
+            <table class="table">
+                <thead>
+                    <th scope="col">Categoria </th>
+                    <th scope="col">descripcion</th>
+                    <th scope="col">Costo Total</th>
                     
+                    <th scope="col">Fecha</th>
                     
-                    
-
-                    
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    
-   
-
+                </thead>
+                <tbody>
+                    @foreach($expenses as $expense)
+                        <tr>
+                            <th scope="row">{{$expense->name}} </th>
+                            <td scope="row">{{$expense->description}}</td>
+                            <td scope="row">{{$expense->totalPayment}}</td>
+                            <td scope="row">{{$expense->created_at}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+    </div>
 @endsection

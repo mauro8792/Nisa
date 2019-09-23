@@ -1,3 +1,12 @@
+body{
+  background-color: #F5FFFA;
+}
+
+/*footer{
+  position: absolute;
+  bottom: 0;
+}*/
+
 .fondo{
     background-image: url('../images/nisaInteriores.jpg');
     background-repeat: no-repeat;
@@ -51,4 +60,8 @@
 
 .panel-heading{
   border-radius: 0;
+}
+
+.n-resize{
+  resize: none;
 }

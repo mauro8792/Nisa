@@ -3,7 +3,7 @@
 @section('title', 'Pagos')
 
 @section('content')
-    <p>Todos los Pagos</p>
+    <h1 class="my-3 text-center">Todos los Pagos</h1>
 
     <table class="table">
         <thead>

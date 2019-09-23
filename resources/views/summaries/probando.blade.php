@@ -9,13 +9,15 @@
             
         } );
     </script>
+
+    <h1 class="my-4 text-center">Listado de Clientes</h1>
     <table id="example" class="display table" style="width:100%">
         <thead>
-            <th scope="col">Name  </th>
-            <th scope="col">LastName</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Apellido</th>
             <th scope="col">Email</th>
-            <th scope="col">Telephone</th>
-            <th scope="col">Edit</th>
+            <th scope="col">Telefono</th>
+            <th scope="col">Editar</th>
             <th scope="col">Estado de cuenta </th>
             <th scope="col">Realizar pago</th>
         </thead>
