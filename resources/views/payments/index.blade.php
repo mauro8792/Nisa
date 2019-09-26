@@ -5,6 +5,7 @@
 @section('content')
     <h1 class="my-3 text-center">Todos los Pagos</h1>
 
+    <div class="table-responsive">
     <table class="table">
         <thead>
             <th scope="col">Fecha  </th>
@@ -30,6 +31,7 @@
             @endforeach
         </tbody>
     </table>
+    </div>
    
 
 @endsection

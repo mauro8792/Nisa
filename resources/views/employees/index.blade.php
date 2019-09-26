@@ -3,9 +3,9 @@
 @section('title', 'Clients')
 
 @section('content')
-
     <h1 class="text-center my-3">Lista de Empleados</h1>
 
+   <div class="table-responsive">
     <table class="table">
         <thead>
             <th scope="col">Nombre  </th>
@@ -20,16 +20,15 @@
         <tbody>
             @foreach($employees as $employee)
                 <tr>
-                    <th scope="row">{{$employee->name}}</th>
+                    <th scope="row">{{$employee->name}} </th>
                     <td scope="row">{{$employee->lastname}}</td>
                     <td scope="row">{{$employee->adress}}</td>
                     <td scope="row">{{$employee->telephone}}</td>
                     <td scope="row">{{$employee->starDate}}</td>
-                    <td scope="row" >{{$employee->salary}}
-                    </td>
+                    <td scope="row">{{$employee->salary}}</td>
                     
-                    <td><a href="/employees/{{$employee->slug}}/edit" class="btn btn-primary">Editar</a> </td>
-                    <td> <form method="POST" action="/employees/{{$employee->slug}}">
+                    <td><a href="/employees/{{$employee->id}}" class="btn btn-primary">Editar</a> </td>
+                    <td> <form method="POST" action="/employees/{{$employee->id}}">
                     {{ csrf_field() }}
                     {{ method_field('DELETE') }}
                      <button type="submit" class="btn btn-danger">Eliminar</button> </form>
@@ -42,6 +41,7 @@
             @endforeach
         </tbody>
     </table>
+   </div>
     
    
 

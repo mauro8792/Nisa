@@ -1,5 +1,7 @@
 <html>
     <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <title>Nisa Interiores - @yield('title')</title>
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -31,7 +33,7 @@
     <body class="fondo2 "  >
         
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark " style="  padding-right: 0px; padding-left: 15px;" >
-            <a class="navbar-brand" href="http://nisainteriores.com.ar/">Inicio</a>
+            <a class="navbar-brand" href="https://nisainteriores.com.ar/">Inicio</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -115,9 +117,7 @@
                             <li class="nav-item">
                                 <a class="nav-link mr-4" href="{{ route('login') }}">{{ __('Login') }}</a>
                             </li>
-                            {{-- <li class="nav-item">
-                                <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
-                            </li>  --}}
+                           
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -144,14 +144,8 @@
         <div class="container">
             @yield('content')
         </div>
-        <footer id="footer" class= "navbar-dark bg-dark text-right" style="padding-bottom: 40px">
-            <div class="container ">
-                <div class="row">
-                    <div class="col-md-8 col-md-offset-4">
-                        <h2  style="font-size: 20px">&copy; 2019  All Rights Reserved.</h2>
-                    </div>
-                </div>
-            </div>
+        <footer class="bg-dark text-white text-center py-1 px-0 myfooter">
+                <h2 class="fz-20">&copy; 2019  All Rights Reserved.</h2>
         </footer>
     </body>
     

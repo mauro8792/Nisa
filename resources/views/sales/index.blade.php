@@ -12,7 +12,8 @@
     <p><h1 class="text-center my-3">Ordenes de Pedido</h1> </p>
    <section>
    
-    <table  id="example"class="display table text-center">
+   <div class="table-responsive">
+    <table  id="example" class="display table text-center">
         <thead>
             <th scope="col">Fecha</th>
             <th scope="col">Cliente </th>
@@ -58,7 +59,5 @@
             @endforeach
         </tbody>
     </table>
-    
-   
-
+    </div>
 @endsection

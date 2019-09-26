@@ -35,7 +35,7 @@ Route::prefix('/pagos')->name('payments.')->middleware(['auth'])->group(function
     Route::get('/employee','PaymentController@searchSale')->name('searchSale');      
 });
 
-Route::resource('sales', 'SaleController');
+Route::resource('sales', 'SaleController')->middleware(['auth']);
 
 Route::prefix('/ventas')->name('sales.')->middleware(['auth'])->group(function(){
     Route::get('/', 'SaleController@index')->name('index');
@@ -45,14 +45,14 @@ Route::prefix('/ventas')->name('sales.')->middleware(['auth'])->group(function()
     Route::get('/forOrder/{numberOfOrden}','SaleController@forOrder')->name('forOrder');
 });
 
-Route::resource('summaries', 'SummaryController');
+Route::resource('summaries', 'SummaryController')->middleware(['auth']);
 Route::prefix('/resumen')->name('summary.')->middleware(['auth'])->group(function(){
     Route::get('/','SummaryController@index')->name('index');
     Route::post('/searchForDate', 'SummaryController@searchForDate')->name('searchForDate');
     Route::post('/searchForMonth', 'SummaryController@searchForMonth')->name('searchForMonth');
 });
 
-Route::resource('expenses', 'ExpenseController');
+Route::resource('expenses', 'ExpenseController')->middleware(['auth']);
 Route::prefix('/gastos')->name('expenses.')->middleware(['auth'])->group(function(){
     Route::get('/','ExpenseController@index')->name('index');
     Route::get('/nuevo','ExpenseController@create')->name('create');

@@ -48,7 +48,7 @@
             </div>
         </div>
   <button type="submit" class="btn btn-primary">Guardar</button>
-  <a href="/clients" class="btn btn-danger">Volver</a>
+  <a href="/employees" class="btn btn-danger">Volver</a>
     </form>
     
 @endsection
