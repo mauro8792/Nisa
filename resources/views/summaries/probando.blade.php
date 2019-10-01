@@ -56,7 +56,7 @@
                         
                         
                         
-                        <td><a href="/clients/{{$client->id}}" class="btn btn-primary">Editar</a> </td>
+                        <td><a href="/clients/{{$client->slug}}/edit" class="btn btn-primary">Editar</a> </td>
                         <td><a href="/accounts/{{$client->id}}" class="btn btn-info">Ver más..</a> </td>
                         
                         @if ($client->accountTotal != 0)

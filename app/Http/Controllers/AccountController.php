@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Account;
-use App\Clients;
+use App\Client;
 use App\CurrentAccount;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class AccountController extends Controller
 {
@@ -47,19 +48,31 @@ class AccountController extends Controller
      */
     public function show(Account $account)
     {
-        //$cuentaCorriente = CurrentAccount::where('account_id', $account->id)->get();
-        //return view('currentaccounts.show',  compact('cuentaCorriente','account'));
-
+        /* $client = DB::table('accounts')
+            ->join('clients', 'accounts.client_id','=','clients.id')
+            ->select('clients.name')
+            ->first(); */
+        /* $flats =  Flat::where('Fk_Building_Id', '=',$buildingid)
+               ->where('Building_Owned_By', '=',Auth::user()->Login_Id)
+               ->orderBy('Flat_Name')
+               ->get(array('Flat_Id as flatId', 'Flat_Name as flatName'))
+               ->toArray() */
+        $cliente = Account::where('id','=',$account->id)
+            ->select('client_id')
+            ->get();
+        $client = Client::where('id','=',$cliente[0]->client_id)
+            ->first();
+            
+        //dd($client);
         $cuentaCorriente= CurrentAccount::where('account_id', $account->id)->with(['sale'=>function($query){
             $query->select('id', 'description','numberOfOrder');
         }])
         ->with(['payment' => function($queryPayment){
             $queryPayment->select('id','paymentForm');
-        }])->get();
+        }])
+        ->get();
 
-        //dd($cuentaCorriente);
-        
-        return view('currentaccounts.show',  compact('cuentaCorriente','account'));
+        return view('currentaccounts.show',  compact('cuentaCorriente','client'));
         
     }
 

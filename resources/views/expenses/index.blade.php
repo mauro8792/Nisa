@@ -5,37 +5,37 @@
 @section('content')
 
 <nav class="navbar navbar-light bg-light mt-5 py-4">
-  <div class="container">
-    <div class="row"> 
-        <div class="col-lg-6">
-            <form method="POST" action="/gastos/searchForCategory" class="form-inline">
-                @csrf
-                <div >
-                    <div class="input-group">
-                        <select class="form-control text-success" name="category" >
-                            @foreach ($categories as $category)
-                                <option value="{{$category->id}}">{{$category->name}}</option> 
-                            @endforeach
-                        </select>
+    <div class="container">
+        <div class="row"> 
+            <div class="col-lg-6">
+                <form method="POST" action="/gastos/searchForCategory" class="form-inline">
+                    @csrf
+                    <div>
+                        <div class="input-group">
+                            <select class="form-control text-success" name="category" >
+                                @foreach ($categories as $category)
+                                    <option value="{{$category->id}}">{{$category->name}}</option> 
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-                </div>
-                <button class="btn btn-outline-success ml-3"     type="submit">Buscar</button>
-            </form>
-        </div>
-        <div class="col-lg-6">
-            <form method="POST" action="/gastos/searchForDate" class="form-inline" > 
-                @csrf
-                <div style="display: flex">
-                    <label for="inicial" class="text-dark mr-2">Desde</label>
-                    <input class="form-control mr-sm-2" type="date" name="init">
-                    <label for="inicial" class="text-dark mr-2">Hasta</label>
-                    <input class="form-control mr-sm-2" type="date" name="fin">
-                    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
-                </div>            
-            </form>      
+                    <button class="btn btn-outline-success ml-3"     type="submit">Buscar</button>
+                </form>
+            </div>
+            <div class="col-lg-6">
+                <form method="POST" action="/gastos/searchForDate" class="form-inline" > 
+                    @csrf
+                    <div style="display: flex">
+                        <label for="inicial" class="text-dark mr-2">Desde</label>
+                        <input class="form-control mr-sm-2" type="date" name="init">
+                        <label for="inicial" class="text-dark mr-2">Hasta</label>
+                        <input class="form-control mr-sm-2" type="date" name="fin">
+                        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Buscar</button>
+                    </div>            
+                </form>      
+            </div>
         </div>
     </div>
-  </div>
 </nav>
     <h1 class="text-center my-3">Lista de Gastos</h1>
     <div class="table-responsive">

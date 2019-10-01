@@ -38,6 +38,7 @@ class CategoryController extends Controller
         if (!Category::where('name','=',$request->input('name'))->exists()) {
             $category = Category::create($request->all());
             $category->slug = $category->name;
+            $category->save();
             return redirect()->route('categories.index');
         }
         else{
