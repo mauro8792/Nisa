@@ -32,7 +32,7 @@ Route::prefix('/pagos')->name('payments.')->middleware(['auth'])->group(function
     Route::get('/nuevo', 'PaymentController@create')->name('create');
     Route::delete('/delete/{id}','PaymentController@destroy')->name('destroy');
     Route::get('/newPayment/{id}','PaymentController@newPayment')->name('newPayment'); 
-    Route::get('/employee','PaymentController@searchSale')->name('searchSale');      
+    Route::get('/employee','PaymentController@searchSale')->name('searchSale');
 });
 
 Route::resource('sales', 'SaleController')->middleware(['auth']);

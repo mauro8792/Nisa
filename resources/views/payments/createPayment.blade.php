@@ -44,11 +44,12 @@
             </div>
             <div class="row">
                 <div class="col-6">
-                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
-                </div>
-                <div class="col-6">
                     <a href="/clients" class="btn btn-danger btn-block">Volver</a>
                 </div>
+                <div class="col-6">
+                    <button type="submit" class="btn btn-primary btn-block">Guardar</button>
+                </div>
+                
             </div>
         </div>
     </form> 

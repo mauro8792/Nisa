@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Sale;
 use App\Account;
+use App\Payment;
 use App\CurrentAccount;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -16,13 +17,22 @@ class SaleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index(Request $request)
-    {
+    {   
+       
        $sales = DB::table('sales')
             ->join('clients', 'sales.client_id','=','clients.id')
             ->select('sales.*', 'clients.name')
+            ->orderBy('sales.date', 'desc')
+            //->paginate(15);
             ->get();
+        //dd($sales);
+       //usort($sales, $this->object_sorter('StartDate'));
+
+        
+        
        return view ('sales.index', compact('sales'));
     }
+   
 
     /**
      * Show the form for creating a new resource.
@@ -113,9 +123,57 @@ class SaleController extends Controller
      */
     public function update(Request $request, Sale $sale)
     {
-        $sale->state = $request->state;
-        $sale->save();
-        return redirect()->route('sales.index', [$sale])->with('status', 'Sale update');
+        if($request->total!=null){
+            
+            $cuentaCorriente = CurrentAccount::where('sale_id', $request->id)->first();
+            
+        
+
+            //dd($cuentaCorriente);
+            $cuentaCorriente->debit = $request->total;
+            $cuentaCorriente->total = $request->total;
+            $cuentaCorriente->save();
+            //$sale = Sale::where('id', $request->id);
+            $sale->total = $request->total;
+            $sale->save();
+
+            // sumar todas las ventas y pagos del cliente
+            
+            $ventaCliente = Sale::where('id', $request->id)
+                        ->select('client_id')
+                        ->first();
+            
+            $ventasTotal = Sale::where('client_id', $ventaCliente->client_id)
+                    ->select(DB::raw('sum(total) as total'))
+                    ->first();
+            
+            $ventasSenia =Sale::where('client_id', $ventaCliente->client_id)
+                    ->select(DB::raw('sum(senia) as senia'))
+                    ->first();
+            
+
+            $totalPago = Payment::where('client_id', $ventaCliente->client_id)
+                    ->select(DB::raw('sum(payment) as pago'))
+                    ->first();
+            
+
+            $totalAccount = $ventasTotal->total - $ventasSenia->senia - $totalPago->pago;
+            //dd($totalAccount);
+            //dd($ventaCliente);
+            $cuenta = Account::where('client_id',$ventaCliente->client_id)->first();
+            //dd($cuenta);
+            $cuenta->accountTotal = $totalAccount;
+            //dd($cuenta->accountTotal);
+            $cuenta->save();
+            return redirect()->route('clients.index');
+
+        }else{
+            $sale->state = $request->state;
+            $sale->save();
+            return redirect()->route('sales.index', [$sale])->with('status', 'Sale update');
+        }
+        
+        
     }
 
     /**

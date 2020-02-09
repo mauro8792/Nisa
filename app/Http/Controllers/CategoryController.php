@@ -78,16 +78,11 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        if (!Category::where('name','=',$request->input('name'))->exists()) {
             $category->fill($request->all());
             $category->slug = $category->name;
             $category->save();
             return redirect()->route('categories.index');
-        }
-        else{
-            $request->session()->flash('alert-success', 'La categoria con ese nombre ya existe!');
-            return redirect()->route('categories.index');
-        }
+        
     }
 
     /**

@@ -18,13 +18,22 @@
         </thead>
         <tbody>
             @foreach($cuentaCorriente as $cuenta)
+                
                 <tr>
                     <td scope="row">{{date('d-m-Y',strtotime($cuenta->date))}}</td>
                     <td scope="row"  >
-                        <a href="/ventas/forOrder/{{$cuenta->sale_id}}" > {{$cuenta->sale['numberOfOrder']}} </a>
+                        <a href="/ventas/forOrder/{{$cuenta->sale_id}}" >
+                        @if (isset($cuenta->sale->numberOfOrder))
+                            {{$cuenta->sale->numberOfOrder}}
+                        @endif
+                             </a>
                     </td>
                     <td scope="row">
-                        <a href="/payments/{{$cuenta->payment_id}}" > {{$cuenta->payment['paymentForm']}} </a>
+                        <a href="/payments/{{$cuenta->payment_id}}" >
+                            @if (isset($cuenta->payment->paymentForm))
+                            {{$cuenta->payment['paymentForm']}}
+                            @endif
+                             </a>
                     </td>
                     <td scope="row">
                         @if ($cuenta->debit!=0)
@@ -37,8 +46,8 @@
                         @endif
                     </td>
                     <td scope="row">${{$cuenta->total}}</td>
-                </tr>
-            @endforeach
+                </tr> 
+            @endforeach 
         </tbody>
     </table>    
     </div>

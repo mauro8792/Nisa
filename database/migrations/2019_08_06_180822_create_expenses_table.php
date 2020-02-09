@@ -17,6 +17,8 @@ class CreateExpensesTable extends Migration
             $table->increments('id');
             $table->string('description');
             $table->integer('category_id')->unsigned();
+            $table->string('numberOfTicket')->nullable();
+            $table->date('date');
             $table->float('totalPayment', 8, 2)->unsigned();
             $table->timestamps();
 

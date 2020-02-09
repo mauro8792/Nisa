@@ -32,7 +32,7 @@
         <div class="form-row">
             <div class="form-group col-md-3  offset-md-3">
                 <label for=""  class="font-weight-bold">Estado del Pedido: {{$sale->state}} </label>
-                <select class="custom-select" name="state" id="state">
+                <select class="custom-select" name="state" id="state" >
                     <option value="Solicitado"> Solicitado</option>
                     <option value="En Proceso"> En Proceso</option>
                     <option value="Finalizado"> Finalizado</option>

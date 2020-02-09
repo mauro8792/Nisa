@@ -22,7 +22,7 @@ class SummaryController extends Controller
         //whereDate()
         $mesActual= date('m');
         $sumaVentas= Sale::whereMonth('date','=',$mesActual)->sum('total');
-        $sumaGastos= Expense::whereMonth('created_at','=',$mesActual)->sum('totalPayment');
+        $sumaGastos= Expense::whereMonth('date','=',$mesActual)->sum('totalPayment');
         $sumaSenia = Sale::whereMonth('date','=',$mesActual)->sum('senia');
         $sumaPagos= Payment::whereMonth('date','=',$mesActual)->sum('payment');
         $efectivoRecibido = $sumaSenia+ $sumaPagos;
@@ -101,7 +101,7 @@ class SummaryController extends Controller
         if($request->init == $request->fin){
             $sumaVentas = Sale::whereDate('date', $request->fin)->sum('total');       
             //Suma de Gastos
-            $sumaGastos = Expense::whereDate('created_at', $request->fin)->sum('totalPayment');
+            $sumaGastos = Expense::whereDate('date', $request->fin)->sum('totalPayment');
             //Suma de senia
             $sumaSenia = Sale::whereDate('date',$request->fin)->sum('senia');
             //Suma de pagos
@@ -114,7 +114,7 @@ class SummaryController extends Controller
             $sumaVentas = Sale::whereBetween('date',[$request->init, $request->fin])
                     ->sum('total');       
             //Suma de Gastos
-            $sumaGastos = Expense::whereBetween('created_at',[$request->init, $request->fin])
+            $sumaGastos = Expense::whereBetween('date',[$request->init, $request->fin])
                     ->sum('totalPayment');
             //Suma de senia
             $sumaSenia = Sale::whereBetween('date',[$request->init, $request->fin])
@@ -132,7 +132,7 @@ class SummaryController extends Controller
 
     public function searchForMonth(Request $request){
         $sumaVentas= Sale::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('total');
-        $sumaGastos= Expense::whereYear('created_at','=',$request->age)->whereMonth('created_at','=',$request->month)->sum('totalPayment');
+        $sumaGastos= Expense::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('totalPayment');
         $sumaSenia = Sale::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('senia');
         $sumaPagos= Payment::whereYear('date','=',$request->age)->whereMonth('date','=',$request->month)->sum('payment');
         $efectivoRecibido = $sumaSenia + $sumaPagos;

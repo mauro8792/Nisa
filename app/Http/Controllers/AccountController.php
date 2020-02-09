@@ -72,7 +72,9 @@ class AccountController extends Controller
         }])
         ->get();
 
-        return view('currentaccounts.show',  compact('cuentaCorriente','client'));
+        //dd($cuentaCorriente);
+        //dd($client);
+        return view('currentaccounts.show')->with(compact('client','cuentaCorriente'));
         
     }
 

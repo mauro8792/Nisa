@@ -3,6 +3,12 @@
 @section('title', 'Expenses')
 
 @section('content')
+<script>
+        $(document).ready(function() {
+             $('#tableExpenses').DataTable();
+            
+        } );
+    </script>
 
 <nav class="navbar navbar-light bg-light mt-5 py-4">
     <div class="container">
@@ -39,22 +45,24 @@
 </nav>
     <h1 class="text-center my-3">Lista de Gastos</h1>
     <div class="table-responsive">
-            <table class="table">
+            <table class="table" id='tableExpenses'>
                 <thead>
+                    <th scope="col">Fecha </th>
                     <th scope="col">Categoria </th>
+                    <th scope="col">Numero de Factura </th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Costo Total</th>
-                    
-                    <th scope="col">Fecha</th>
                     
                 </thead>
                 <tbody>
                     @foreach($expenses as $expense)
                         <tr>
+                            <td scope="row">{{date('d-m-Y',strtotime($expense->date))}}</td>
                             <th scope="row">{{$expense->name}} </th>
+                            <th scope="row">{{$expense->numberOfTicket}} </th>
                             <td scope="row">{{$expense->description}}</td>
                             <td scope="row">{{$expense->totalPayment}}</td>
-                            <td scope="row">{{date('d-m-Y',strtotime($expense->created_at))}}</td>
+                            
                         </tr>
                     @endforeach
                 </tbody>

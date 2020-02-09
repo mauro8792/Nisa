@@ -8,9 +8,22 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
         <link href="{{ asset('css/estilos.css') }}" rel="stylesheet">
-        <link rel=”stylesheet” href=”tucarpeta/css/font-awesome.min.css“>
+       
+        <link href="https://nightly.datatables.net/css/jquery.dataTables.css" rel="stylesheet" type="text/css" />
+        <script src="https://nightly.datatables.net/js/jquery.dataTables.js"></script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.8.4/moment.min.js"></script>
+        <script src="https://cdn.datatables.net/plug-ins/1.10.19/sorting/datetime-moment.js"></script>
+    
+       
+       {{--  <script type = "text / javascript" src = " https: ////cdn.datatables.net/plug-ins/1.10.20/dataRender/datetime.js"> </script>
+        
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
+        <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> --}}
+
+
+        
+
         <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
         
@@ -144,9 +157,7 @@
         <div class="container">
             @yield('content')
         </div>
-        <footer class="bg-dark text-white text-center py-1 px-0 myfooter">
-                <h2 class="fz-20">&copy; 2019  All Rights Reserved.</h2>
-        </footer>
+        
     </body>
     
 </html>

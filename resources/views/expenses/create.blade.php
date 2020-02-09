@@ -16,6 +16,14 @@
                     @endforeach
                  </select>
             </div>
+            <div class="form-group col-lg-3 offset-lg-3">
+                <label for="" class="font-weight-bold">Numero de factura</label>
+                <input type="text" name="numberOfTicket" class="form-control" required>
+            </div>
+            <div class="form-group col-lg-3 ">
+                <label for="" class="font-weight-bold">Fecha</label>
+                <input type="date" name="date" class="form-control" required>
+            </div>
             <div class="form-group col-lg-6 offset-lg-3">
                 <label for="" class="font-weight-bold">Descripcion del Gasto:</label>
                 <input type="text" name="description" class="form-control" required>
