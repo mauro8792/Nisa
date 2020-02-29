@@ -21,8 +21,21 @@
         <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
         <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script> --}}
 
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.6.1/css/buttons.dataTables.min.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.1/js/dataTables.buttons.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/1.6.1/js/buttons.print.min.js"></script>
 
+
+        <!-- -->
         
+        <script src="../../public/dataTable/Buttons-1.5.6/js/dataTables.buttons.min.js"></script>  
+        <script src="datatables/JSZip-2.5.0/jszip.min.js"></script>    
+        <script src="datatables/pdfmake-0.1.36/pdfmake.min.js"></script>    
+        <script src="datatables/pdfmake-0.1.36/vfs_fonts.js"></script>
+        <script src="datatables/Buttons-1.5.6/js/buttons.html5.min.js"></script>
 
         <script src="https://kit.fontawesome.com/994e7e9fc5.js"></script>
         <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">

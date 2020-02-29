@@ -3,7 +3,7 @@
 @section('title', 'Clientes')
 
 @section('content')
-    <h1 class="text-center my-5">Cuenta Corriente Cliente: {{$client->name}}</h1>
+    <h1 class="text-center my-5">Cuenta Corriente Clientes: {{$client->name}}</h1>
 
     <div class="table-responsive">
     <table class="table table-hover">
@@ -17,8 +17,10 @@
             <th scope="col">Total</th>
         </thead>
         <tbody>
+                @php
+                    $total=0;
+                @endphp
             @foreach($cuentaCorriente as $cuenta)
-                
                 <tr>
                     <td scope="row">{{date('d-m-Y',strtotime($cuenta->date))}}</td>
                     <td scope="row"  >
@@ -32,20 +34,27 @@
                         <a href="/payments/{{$cuenta->payment_id}}" >
                             @if (isset($cuenta->payment->paymentForm))
                             {{$cuenta->payment['paymentForm']}}
+                            
                             @endif
                              </a>
                     </td>
                     <td scope="row">
                         @if ($cuenta->debit!=0)
                             ${{$cuenta->debit}}
+                            @php
+                                $total = $total + $cuenta->debit
+                            @endphp
                         @endif
                     </td>
                     <td scope="row">
                          @if ($cuenta->assets!=0)
                             ${{$cuenta->assets}}
+                            @php
+                                $total = $total - $cuenta->assets
+                            @endphp
                         @endif
                     </td>
-                    <td scope="row">${{$cuenta->total}}</td>
+                    <td scope="row">${{$total}}</td>
                 </tr> 
             @endforeach 
         </tbody>

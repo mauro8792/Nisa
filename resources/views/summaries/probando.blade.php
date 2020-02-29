@@ -5,16 +5,21 @@
 @section('content')
     <script>
         $(document).ready(function() {
-             $('#example').DataTable();
+             $('#example').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'print','copy', 'excel', 'pdf'
+                ]
+    } );
             
         } );
     </script>
 
     <h1 class="my-4 text-center">Listado de Clientes</h1>
     <div class="table-responsive">
-        <table id="example" class="table">
+        <table id="example" class="display" >
             <thead>
-                <th scope="col">Nombre</th>
+                <th scope="col">nombres</th>
                 <th scope="col">Apellido</th>
                 <th scope="col">Email</th>
                 <th scope="col">Telefono</th>

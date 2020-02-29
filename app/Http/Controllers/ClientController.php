@@ -21,11 +21,13 @@ class ClientController extends Controller
      */
     public function index(Request $request)
     {   
-        $request->user()->authorizeRoles(['admin']);
+        
+        //$request->user()->authorizeRoles(['admin']);
         
         $clients = DB::table('clients')
             ->join('accounts', 'clients.id', '=', 'accounts.client_id')
             ->get();
+        //return response()->json($clients,200);    
         return view('summaries.probando', compact('clients'));        
     }
 
