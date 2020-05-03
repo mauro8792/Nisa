@@ -79,9 +79,9 @@ class SaleController extends Controller
         $cuentaCorriente->client_id = $sale->client_id;
         $cuentaCorriente->account_id = $account->id;
         $cuentaCorriente->sale()->associate($sale->id);
-        if($sale->senia != 0){
-            $cuentaCorriente->assets=$sale->senia;
-        }
+            if($sale->senia != 0){
+                $cuentaCorriente->assets=$sale->senia;
+            }
         $cuentaCorriente->debit= $sale->total;
         $cuentaCorriente->total= $account->accountTotal;
         $cuentaCorriente->date =$request->input('date');
@@ -165,7 +165,8 @@ class SaleController extends Controller
             $cuenta->accountTotal = $totalAccount;
             //dd($cuenta->accountTotal);
             $cuenta->save();
-            return redirect()->route('clients.index');
+            //return redirect()->route('clients.index');
+            return back();
 
         }else{
             $sale->state = $request->state;
@@ -182,9 +183,22 @@ class SaleController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        //dd($request->sale_id);
+        $sale = Sale::where('id', $request->sale_id)->first();
+        $client = Client::where('id', $sale->client_id)->first();
+        $client->numberOfOrder = $sale->numberOfOrder;
+        $client->save();
+        $cuentaCorriente= CurrentAccount::where('sale_id', $request->sale_id)->first();
+        $account = Account::where('id', $cuentaCorriente->account_id)->first();
+        //dd($sale);
+        $account->accountTotal =$account->accountTotal - $sale->total;
+        $account->save();
+        $cuentaCorriente->delete();
+        $sale->delete();
+        return back();
+        //dd($sale);
     }
     public function forOrder($id){
         $sale = Sale::where('id', $id)->first();
@@ -192,3 +206,6 @@ class SaleController extends Controller
         return view('sales.show', compact('sale','client'));
     }
 }
+
+
+ //[2020-04-11 13:11:32] production.ERROR: SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'accountTotal' at row 1 (SQL: update `accounts` set `accountTotal` = 1019848.55, `updated_at` = 2020-04-11 13:11:32 where `id` = 4) {"userId":6,"email":"tapicerianisa@hotmail.com","exception":"[object] (Illuminate\\Database\\QueryException(code: 22003): SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'accountTotal' at row 1 (SQL: update `accounts` set `accountTotal` = 1019848.55, `updated_at` = 2020-04-11 13:11:32 where `id` = 4) at /home/c1641070/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php:664, PDOException(code: 22003): SQLSTATE[22003]: Numeric value out of range: 1264 Out of range value for column 'accountTotal' at row 1 at /home/c1641070/public_html/vendor/laravel/framework/src/Illuminate/Database/Connection.php:483)
